@@ -9,7 +9,8 @@ This demo runs on the following platforms:
     * iPod Accessory Development Board for 8-bit PIC MCUs with a PIC18F87J11
     * Explorer 16 and a PIC24FJ256GB110 with a PICtail Plus card that includes
         a Flexipanel LM20 Bluetooth module and an Apple Coprocessor chip.
-    * Explorer 16 and a Bluetooth PICtail Plus.  NOTE: This requires hardware
+
+    * Explorer 16 and a Bluetooth PICtail Plus.  NOTE: This requires hardware
         modification.  If using a PIC32MX, the iPod PICtail Plus must be modified
         to move the Authentication Coprocessor nRESET to pin 1 of J2.  If using
         a PIC24F, usually either the iPod PICtail Plus or the Bluetooth PICtail
@@ -789,6 +790,8 @@ int main( void )
     // Initialize the system.
     Initialize();
 
+    Open2USART(USART_TX_INT_OFF & USART_RX_INT_OFF & USART_ASYNCH_MODE & USART_EIGHT_BIT & USART_CONT_RX & USART_BRGH_HIGH, USART1_SPBRG);
+
     // We are now ready to go.
     UpdateInformation( WELCOME_STRING );
 
@@ -805,7 +808,8 @@ int main( void )
         // between the acccessory and the Apple Device, you may want to move
         // MFI_Tasks and iPxx_Tasks to the default case, so it is executed whenever
         // possible.
-
+        putrs2USART( "Hello World!" );
+        Delay10KTCYx(200);
         if (( TickGet() - timeLast10ms ) > ( 10 * dwTicksPerMillisecond ))
         {
             timeLast10ms = TickGet();

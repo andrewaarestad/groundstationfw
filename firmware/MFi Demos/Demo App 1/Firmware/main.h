@@ -34,6 +34,8 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 ////////////////////////////////////////////////////////////////////////////////
 // Common
 
+#include <usart.h>
+#include <delays.h>
 #include "GenericTypedefs.h"
 #include "mfi_config.h"
 #include "system.h"
