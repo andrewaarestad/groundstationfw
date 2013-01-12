@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- 2011 Microchip Technology Inc. -->
+
+<!-- XML Format Policy -->
+<!-- In VERSION tag, use MAJOR/MINOR/DOT OR STRING, not both at the same time -->
+
+<DISTRIBUTION>
+
+  <INFO>
+    <NAME>Microchip MFi Library</NAME>
+    <SHORT_NAME>MCHPMFI</SHORT_NAME>
+    <VERSION>
+      <STRING>SW320411</STRING>
+    </VERSION>
+  </INFO>
+
+  <LIBRARIES>
+
+    <LIBRARY>
+      <NAME>MFi Library</NAME>
+      <SHORT_NAME>MFI</SHORT_NAME>
+      <VERSION>
+        <MAJOR>3</MAJOR>
+        <MINOR>5</MINOR>
+        <DOT>0</DOT>
+      </VERSION>
+    </LIBRARY>
+
+  </LIBRARIES>
+
+</DISTRIBUTION>

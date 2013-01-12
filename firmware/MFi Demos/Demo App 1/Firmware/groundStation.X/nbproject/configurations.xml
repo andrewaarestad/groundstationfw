@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configurationDescriptor version="62">
+  <logicalFolder name="root" displayName="root" projectFiles="true">
+    <logicalFolder name="HeaderFiles"
+                   displayName="Header Files"
+                   projectFiles="true">
+      <logicalFolder name="I2C" displayName="I2C" projectFiles="true">
+        <itemPath>../../../../Microchip/Include/MFI/I2C PIC18/i2c.h</itemPath>
+      </logicalFolder>
+      <logicalFolder name="MFI" displayName="MFI" projectFiles="true">
+        <itemPath>../../../../Microchip/Include/MFI/MFI_Authentication.h</itemPath>
+        <itemPath>../../../../Microchip/Include/MFI/MFI_Data.h</itemPath>
+        <itemPath>../../../../Microchip/Include/MFI/MFI_Identification.h</itemPath>
+        <itemPath>../../../../Microchip/Include/MFI/MFI_Interface.h</itemPath>
+        <itemPath>../../../../Microchip/Include/MFI/MFI_iPod.h</itemPath>
+        <itemPath>../../../../Microchip/Include/MFI/MFI_iPod_UART.h</itemPath>
+        <itemPath>../UART/mfi_config.h</itemPath>
+        <itemPath>../UART/mfi_handlers.h</itemPath>
+      </logicalFolder>
+      <itemPath>../../../../Microchip/Include/Compiler.h</itemPath>
+      <itemPath>../../../../Microchip/Include/DebugUARTBuffered.h</itemPath>
+      <itemPath>../../../../Microchip/Include/GenericTypeDefs.h</itemPath>
+      <itemPath>../PIC18/HardwareProfile.h</itemPath>
+      <itemPath>../../../../Microchip/MFI/I2C PIC18/I2CPrivate.h</itemPath>
+      <itemPath>../PIC18/LM49450.h</itemPath>
+      <itemPath>../PIC18/MCP9800.h</itemPath>
+      <itemPath>../Tick.h</itemPath>
+      <itemPath>../../../../Microchip/Include/TimeDelay.h</itemPath>
+      <itemPath>../iPxx.h</itemPath>
+      <itemPath>../main.h</itemPath>
+      <itemPath>../PIC18/system.h</itemPath>
+    </logicalFolder>
+    <logicalFolder name="LibraryFiles"
+                   displayName="Library Files"
+                   projectFiles="true">
+      <itemPath>../../../../Microchip/MFI/libMFI_PIC18_SMALL_SINGLE.lib</itemPath>
+    </logicalFolder>
+    <logicalFolder name="LinkerScript"
+                   displayName="Linker Files"
+                   projectFiles="true">
+    </logicalFolder>
+    <logicalFolder name="ObjectFiles"
+                   displayName="Object Files"
+                   projectFiles="true">
+    </logicalFolder>
+    <logicalFolder name="SourceFiles"
+                   displayName="Source Files"
+                   projectFiles="true">
+      <logicalFolder name="I2C" displayName="I2C" projectFiles="true">
+        <itemPath>../../../../Microchip/MFI/I2C PIC18/I2CAcknowledgeByte.c</itemPath>
+        <itemPath>../../../../Microchip/MFI/I2C PIC18/I2CAcknowledgeHasCompleted.c</itemPath>
+        <itemPath>../../../../Microchip/MFI/I2C PIC18/I2CBusIsIdle.c</itemPath>
+        <itemPath>../../../../Microchip/MFI/I2C PIC18/I2CByteWasAcknowledged.c</itemPath>
+        <itemPath>../../../../Microchip/MFI/I2C PIC18/I2CClearStatus.c</itemPath>
+        <itemPath>../../../../Microchip/MFI/I2C PIC18/I2CConfigure.c</itemPath>
+        <itemPath>../../../../Microchip/MFI/I2C PIC18/I2CEnable.c</itemPath>
+        <itemPath>../../../../Microchip/MFI/I2C PIC18/I2CGetByte.c</itemPath>
+        <itemPath>../../../../Microchip/MFI/I2C PIC18/I2CGetStatus.c</itemPath>
+        <itemPath>../../../../Microchip/MFI/I2C PIC18/I2CPrivate.c</itemPath>
+        <itemPath>../../../../Microchip/MFI/I2C PIC18/I2CReceivedByteIsAnAddress.c</itemPath>
+        <itemPath>../../../../Microchip/MFI/I2C PIC18/I2CReceivedDataIsAvailable.c</itemPath>
+        <itemPath>../../../../Microchip/MFI/I2C PIC18/I2CReceiverEnable.c</itemPath>
+        <itemPath>../../../../Microchip/MFI/I2C PIC18/I2CRepeatStart.c</itemPath>
+        <itemPath>../../../../Microchip/MFI/I2C PIC18/I2CSendByte.c</itemPath>
+        <itemPath>../../../../Microchip/MFI/I2C PIC18/I2CSetFrequencyWithConstant.c</itemPath>
+        <itemPath>../../../../Microchip/MFI/I2C PIC18/I2CStart.c</itemPath>
+        <itemPath>../../../../Microchip/MFI/I2C PIC18/I2CStop.c</itemPath>
+        <itemPath>../../../../Microchip/MFI/I2C PIC18/I2CTransmissionHasCompleted.c</itemPath>
+        <itemPath>../../../../Microchip/MFI/I2C PIC18/I2CTransmitterIsReady.c</itemPath>
+      </logicalFolder>
+      <logicalFolder name="MFI" displayName="MFI" projectFiles="true">
+        <itemPath>../../../../Microchip/MFI/MFI_Data.c</itemPath>
+        <itemPath>../../../../Microchip/MFI/MFI_iPod_UART.c</itemPath>
+        <itemPath>../UART/mfi_handlers.c</itemPath>
+      </logicalFolder>
+      <itemPath>../../../../Microchip/Common/DebugUARTBuffered.c</itemPath>
+      <itemPath>../PIC18/LM49450.c</itemPath>
+      <itemPath>../PIC18/MCP9800.c</itemPath>
+      <itemPath>../Tick.c</itemPath>
+      <itemPath>../../../../Microchip/Common/TimeDelay.c</itemPath>
+      <itemPath>../iPxx.c</itemPath>
+      <itemPath>../main.c</itemPath>
+      <itemPath>../PIC18/system.c</itemPath>
+    </logicalFolder>
+    <logicalFolder name="ExternalFiles"
+                   displayName="Important Files"
+                   projectFiles="false">
+      <itemPath>Makefile</itemPath>
+    </logicalFolder>
+  </logicalFolder>
+  <projectmakefile>Makefile</projectmakefile>
+  <confs>
+    <conf name="default" type="2">
+      <toolsSet>
+        <developmentServer>localhost</developmentServer>
+        <targetDevice>PIC18F87J11</targetDevice>
+        <targetHeader></targetHeader>
+        <targetPluginBoard></targetPluginBoard>
+        <platformTool>ICD3PlatformTool</platformTool>
+        <languageToolchain>C18</languageToolchain>
+        <languageToolchainVersion>3.40</languageToolchainVersion>
+        <platform>4</platform>
+      </toolsSet>
+      <compileType>
+        <linkerTool>
+          <linkerLibItems>
+          </linkerLibItems>
+        </linkerTool>
+        <loading>
+          <useAlternateLoadableFile>false</useAlternateLoadableFile>
+          <alternateLoadableFile></alternateLoadableFile>
+        </loading>
+      </compileType>
+      <makeCustomizationType>
+        <makeCustomizationPreStepEnabled>false</makeCustomizationPreStepEnabled>
+        <makeCustomizationPreStep></makeCustomizationPreStep>
+        <makeCustomizationPostStepEnabled>false</makeCustomizationPostStepEnabled>
+        <makeCustomizationPostStep></makeCustomizationPostStep>
+        <makeCustomizationPutChecksumInUserID>false</makeCustomizationPutChecksumInUserID>
+        <makeCustomizationEnableLongLines>false</makeCustomizationEnableLongLines>
+        <makeCustomizationNormalizeHexFile>false</makeCustomizationNormalizeHexFile>
+      </makeCustomizationType>
+      <C18>
+        <property key="code-model" value="ms"/>
+        <property key="data-model" value="oa-"/>
+        <property key="default-char-unsigned" value="false"/>
+        <property key="enable-all-optimizations" value="true"/>
+        <property key="enable-int-promotion" value="false"/>
+        <property key="enable-multi-bank-stack-model" value="false"/>
+        <property key="enable-ob" value="true"/>
+        <property key="enable-od" value="true"/>
+        <property key="enable-om" value="true"/>
+        <property key="enable-on" value="true"/>
+        <property key="enable-op" value="true"/>
+        <property key="enable-opa" value="true"/>
+        <property key="enable-or" value="true"/>
+        <property key="enable-os" value="true"/>
+        <property key="enable-ot" value="true"/>
+        <property key="enable-ou" value="true"/>
+        <property key="enable-ow" value="true"/>
+        <property key="extra-include-directories"
+                  value="..;../PIC18;../UART;../../../../Microchip/Include;/C/Program Files/Microchip/mplabc18/v3.38/h;../../../../Microchip/Include/MFI;../../../../Microchip/MFI/I2C PIC18;../../../../Microchip/Include/MFI/I2C PIC18;"/>
+        <property key="optimization-master" value="Custom"/>
+        <property key="preprocessor-macros" value=""/>
+        <property key="procedural-abstraction-passes" value="0"/>
+        <property key="storage-class" value="sca"/>
+        <property key="verbose" value="false"/>
+        <property key="warning-level" value="2"/>
+      </C18>
+      <C18-AS>
+        <property key="cross.reference.file" value=""/>
+        <property key="default.radix" value="HEX"/>
+        <property key="enable.case.sensitivity" value="false"/>
+        <property key="hex.output.format" value="INHX32"/>
+        <property key="preprocessor.macros" value=""/>
+        <property key="warning.level" value="0"/>
+      </C18-AS>
+      <C18-LD>
+        <property key="cod-file" value="false"/>
+        <property key="extra-lib-directories" value="..;"/>
+        <property key="hex-output-format" value="INHX32"/>
+        <property key="map-file" value=""/>
+      </C18-LD>
+      <C18LanguageToolchain>
+        <property key="extended-mode" value="false"/>
+        <property key="extended-mode-mcc18" value="false"/>
+        <property key="extended-mode-mpasm" value="false"/>
+        <property key="extended-mode-mplink" value="false"/>
+        <property key="stack-analysis" value="false"/>
+        <property key="stack-analysis-mcc18" value="false"/>
+        <property key="stack-analysis-mplink" value="false"/>
+      </C18LanguageToolchain>
+      <ICD3PlatformTool>
+      </ICD3PlatformTool>
+    </conf>
+  </confs>
+</configurationDescriptor>
