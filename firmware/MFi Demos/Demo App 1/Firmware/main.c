@@ -808,8 +808,6 @@ int main( void )
         // between the acccessory and the Apple Device, you may want to move
         // MFI_Tasks and iPxx_Tasks to the default case, so it is executed whenever
         // possible.
-        putrs2USART( "Hello World!" );
-        Delay10KTCYx(200);
         if (( TickGet() - timeLast10ms ) > ( 10 * dwTicksPerMillisecond ))
         {
             timeLast10ms = TickGet();
@@ -846,6 +844,7 @@ int main( void )
                     MCP9800_StartRead();
                 #endif
             }
+            putrs2USART( "Hello World!\r\n" );
         }
         else
         {
