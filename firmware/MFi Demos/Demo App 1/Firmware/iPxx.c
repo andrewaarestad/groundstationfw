@@ -737,14 +737,31 @@ void iPxx_Tasks( INTERFACE_DATA *interfaceData )
                                     *pCommandData++ = SYNC_BYTE_1;
                                     *pCommandData++ = SYNC_BYTE_2;
 
+                                    /*
                                     *pCommandData++ = ACC_ReturnTemperature;
 
                                     *pCommandData++ = interfaceData->temperatureSign;
                                     *pCommandData++ = interfaceData->temperatureDegrees;
                                     *pCommandData++ = interfaceData->temperatureTenths;
 
-                                    pCommandData += 2;
-                                    bytesUsed += 10;
+                                    */
+
+                                    *pCommandData++ = ACC_HelloWorld;
+                                    *pCommandData++ = 72;
+                                    *pCommandData++ = 101;
+                                    *pCommandData++ = 108;
+                                    *pCommandData++ = 108;
+                                    *pCommandData++ = 111;
+                                    *pCommandData++ = 32;
+                                    *pCommandData++ = 87;
+                                    *pCommandData++ = 111;
+                                    *pCommandData++ = 114;
+                                    *pCommandData++ = 108;
+                                    *pCommandData++ = 100;
+                                    *pCommandData++ = 0x00;
+
+                                    //pCommandData += 2;
+                                    bytesUsed += 17;
                                 }
                                 break;
 

@@ -730,6 +730,7 @@ void MonitorVBUS( void )
 }
 
 
+
 /****************************************************************************
   Function:
     void UpdateInformation( const char * newString )
@@ -808,8 +809,7 @@ int main( void )
         // between the acccessory and the Apple Device, you may want to move
         // MFI_Tasks and iPxx_Tasks to the default case, so it is executed whenever
         // possible.
-        putrs2USART( "Hello World!" );
-        Delay10KTCYx(200);
+        
         if (( TickGet() - timeLast10ms ) > ( 10 * dwTicksPerMillisecond ))
         {
             timeLast10ms = TickGet();
@@ -817,6 +817,9 @@ int main( void )
             MFI_Tasks();
             iPxx_Tasks( &interfaceData );
             MonitorVBUS();
+
+            putrs1USART( "Hello World!\r\n" );
+            
         }
         else if (( TickGet() - timeLast100ms ) > ( 100 * dwTicksPerMillisecond ))
         {
@@ -865,6 +868,11 @@ int main( void )
                 DotStack_Tasks ();
             #endif
         #endif
+
+        //putrs2USART( "Hello World!\r\n" );
+        //putrs1USART( "Hello World!\r\n" );
+        //Delay10KTCYx(20);
+
     }
 }
 
