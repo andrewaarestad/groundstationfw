@@ -788,8 +788,13 @@ void main( void )
 int main( void )
 #endif
 {
+    char uart2ReadBuffer[100];
+    int count;
+    count = 0;
+
     // Initialize the system.
     Initialize();
+
 
     Open2USART(USART_TX_INT_OFF & USART_RX_INT_OFF & USART_ASYNCH_MODE & USART_EIGHT_BIT & USART_CONT_RX & USART_BRGH_HIGH, USART1_SPBRG);
 
@@ -838,6 +843,21 @@ int main( void )
                     UpdateInformation( WELCOME_STRING );
                 }
             #endif
+            
+            if(DataRdy2USART())
+            {
+                //putrs2USART("DataReady\r\n");
+                while(DataRdy2USART())
+                {
+                    uart2ReadBuffer[count] = Read2USART();
+                    ++count;
+                }
+                uart2ReadBuffer[count] = 0;
+                //gets2USART(uart2ReadBuffer,100);
+                count = 0;
+                puts2USART(uart2ReadBuffer);
+            }
+            
         }
         else if (( TickGet() - timeLast1s ) > ( dwTicksPerSecond ))
         {
