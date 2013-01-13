@@ -89,7 +89,8 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
     #define ACC_ReturnPotentiometer             8
     #define ACC_SetVolume                       9
 
-    #define ACC_HelloWorld                      20
+    #define ACC_GetDebugInstrum                 20
+    #define ACC_ReturnDebugInstrum              21
 
     #define ACC_Board_PIC18                     2
     #define ACC_Board_EXPLORER16                3

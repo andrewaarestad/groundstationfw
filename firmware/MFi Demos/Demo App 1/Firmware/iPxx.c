@@ -737,16 +737,31 @@ void iPxx_Tasks( INTERFACE_DATA *interfaceData )
                                     *pCommandData++ = SYNC_BYTE_1;
                                     *pCommandData++ = SYNC_BYTE_2;
 
-                                    /*
                                     *pCommandData++ = ACC_ReturnTemperature;
 
                                     *pCommandData++ = interfaceData->temperatureSign;
                                     *pCommandData++ = interfaceData->temperatureDegrees;
                                     *pCommandData++ = interfaceData->temperatureTenths;
 
-                                    */
+                                    pCommandData += 2;
+                                    bytesUsed += 10;
+                                }
+                                break;
 
-                                    *pCommandData++ = ACC_HelloWorld;
+                            case ACC_GetDebugInstrum:
+                                // This response requires 17 bytes
+                                if ( (bytesUsed + 17) > ( mfi_iPodApplicationInformation.maxCommandPayloadLengthOut - 4 ) )
+                                {
+                                    spaceAvailable = FALSE;
+                                }
+                                else
+                                {
+                                    *pCommandData++ = HIGH_BYTE( iPxxSessionID );
+                                    *pCommandData++ = LOW_BYTE(  iPxxSessionID );
+                                    *pCommandData++ = SYNC_BYTE_1;
+                                    *pCommandData++ = SYNC_BYTE_2;
+
+                                    *pCommandData++ = ACC_ReturnDebugInstrum;
                                     *pCommandData++ = 72;
                                     *pCommandData++ = 101;
                                     *pCommandData++ = 108;
@@ -760,7 +775,6 @@ void iPxx_Tasks( INTERFACE_DATA *interfaceData )
                                     *pCommandData++ = 100;
                                     *pCommandData++ = 0x00;
 
-                                    //pCommandData += 2;
                                     bytesUsed += 17;
                                 }
                                 break;
