@@ -90,6 +90,7 @@
 				[self queueTxBytes:[NSData dataWithBytes:requestTemp length:sizeof(requestTemp)]];
 				//[self queueTxBytes:[NSData dataWithBytes:requestDebugInstrum length:sizeof(requestDebugInstrum)]];
 			}
+            [self queueTxBytes:[NSData dataWithBytes:requestDebugInstrum length:sizeof(requestDebugInstrum)]];
 		}
 		if (BoardID == MFI_16_BIT_HW) {
 			updateRate = kUPDATERATE_FAST;
@@ -176,7 +177,7 @@
                 }
                 break;
 			default: // unknown command
-				NSLog(@"%@ : Unknown Command %d",theProtocol,buf[0]);
+				NSLog(@"%@ : Unknown Message: %d",theProtocol,buf[0]);
 				break;
 		}
 	}
