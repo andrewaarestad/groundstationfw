@@ -1,3 +1,0 @@
-Warning[2105] ../PIC18/HardwareProfile.h 123 : UART baud rate unsupported - using 19200
-Warning[2066] ../main.c 489 : type qualifier mismatch in assignment
-Warning[2066] ../main.c 821 : type qualifier mismatch in assignment
