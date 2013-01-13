@@ -70,6 +70,7 @@
 {
 	char requestTemp[6] = {5,0,0,0,0,0};
 	char requestPot[6] = {7,0,0,0,0,0};
+	char requestDebugInstrum[6] = {20,0,0,0,0,0};
 	int c = 0;
 	float updateRate = kUPDATERATE_SLOW;
 	thePool = [[NSAutoreleasePool alloc] init];
@@ -87,6 +88,7 @@
 			if ((++c % (int)(1.0/updateRate))==0) // update the temperature once per second
 			{
 				[self queueTxBytes:[NSData dataWithBytes:requestTemp length:sizeof(requestTemp)]];
+				//[self queueTxBytes:[NSData dataWithBytes:requestDebugInstrum length:sizeof(requestDebugInstrum)]];
 			}
 		}
 		if (BoardID == MFI_16_BIT_HW) {
@@ -168,7 +170,7 @@
 					}
 				}
 				break;
-            case 20: // HelloWorld
+            case 21: // ReturnDebugInstrum
                 {
                     NSLog(@"Received message: %@",[NSString stringWithUTF8String:&dataBuffer]);
                 }
