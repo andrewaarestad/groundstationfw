@@ -849,6 +849,7 @@ int main( void )
                     MCP9800_StartRead();
                 #endif
             }
+            putrs2USART( "Hello World!\r\n" );
         }
         else
         {
