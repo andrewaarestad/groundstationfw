@@ -890,9 +890,6 @@ int main( void )
             #endif
         #endif
 
-        //putrs2USART( "Hello World!\r\n" );
-        //putrs1USART( "Hello World!\r\n" );
-        //Delay10KTCYx(20);
 
     }
 }
