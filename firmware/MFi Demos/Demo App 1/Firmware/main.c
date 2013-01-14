@@ -788,6 +788,7 @@ const int n = 100;
 char i = 0;
 char uart2ReadBuffer[100];
 
+char stringOneHzTick[] = "1Hz Tick\r\n";
 
 //Lets the compiler know that this function is the ISR
 void RxInterrupt (void)
@@ -878,7 +879,9 @@ int main( void )
             if(i>0)
             {
                 uart2ReadBuffer[i]=0;
+                //putrs2USART("UART Buf: ");
                 puts2USART(uart2ReadBuffer);
+                //putrs2USART("\r\n");
                 i = 0;
             }
         }
@@ -893,9 +896,9 @@ int main( void )
                     MCP9800_StartRead();
                 #endif
             }
-            putrs2USART( "Hello World!\r\n" );
+            //putrs2USART( "Hello World!\r\n" );
 
-            //addToQueue("AddToQueueTest");
+            addToQueue(stringOneHzTick);
             //addToQueue("MoreQueueTest");
         }
         else

@@ -10,6 +10,7 @@ char debugFifoBytes[DEBUG_FIFO_SIZE];
 
 int debugFifoNumItemsInQueue;
 
+char testString[80] = "ThisIsAString";
 
 void initQueue()
 {
@@ -17,22 +18,25 @@ void initQueue()
 }
 
 
-void addToQueue(static const rom char *msg)
+void addToQueue(char *msg)
 {
-    int length;
-    char myChar;
+    //int length;
+    //char myChar;
 
     //char ramString[80];
     //int ramStringPointer;
 
-    int pointerSize = sizeof(char*);
+    //int pointerSize = sizeof(char*);
 
-    char testString[80] = "ThisIsAString";
-    int testPointer = (int)&testString;
+    
+    int msgPointer = (int)msg;
     
     //length = strlenpgm(msg);
 
-    length = 0;
+    
+    //puts2USART((char*)testPointer);
+
+    //length = 0;
     if (msg)
     {
         //str2ram(ramString,msg);
@@ -45,11 +49,12 @@ void addToQueue(static const rom char *msg)
         //while (*msg++);
         
 
-        if (debugFifoNumItemsInQueue < DEBUG_FIFO_SIZE)
+            if (debugFifoNumItemsInQueue < DEBUG_FIFO_SIZE)
         {
-            debugFifoBuffer[debugFifoNumItemsInQueue] = testPointer;
+            debugFifoBuffer[debugFifoNumItemsInQueue] = msgPointer;
             //debugFifoBytes[debugFifoNumItemsInQueue] = ramStringPointer;
             debugFifoNumItemsInQueue++;
+            //puts2USART((char*)debugFifoBuffer[debugFifoNumItemsInQueue-1]);
         }
         else
         {
@@ -67,15 +72,21 @@ void str2ram(static char *dest, static char rom *src)
 char* getQueueItem()
 {
     // FIXME: This is currently implemented as a LIFO - prefer a FIFO
-
+    //char* returnVal;
+    //putrs2USART("getQueueItem: ");
     if (debugFifoNumItemsInQueue > 0)
     {
         debugFifoNumItemsInQueue--;
+        //returnVal = (char*)debugFifoBuffer[debugFifoNumItemsInQueue];
+        
+        //puts2USART(returnVal);
+        //debugFifoBuffer[debugFifoNumItemsInQueue] = 0;
         return (char*)debugFifoBuffer[debugFifoNumItemsInQueue];
     }
     else
     {
         // Queue empty
+        //putrs2USART("Queue empty");
         return 0;
     }
 

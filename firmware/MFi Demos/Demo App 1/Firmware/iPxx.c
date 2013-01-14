@@ -461,6 +461,7 @@ void iPxx_Tasks( INTERFACE_DATA *interfaceData )
     UINT8   *pCommandData;
 
     int bytesNeeded;
+    int stringSize;
     int idx;
     
     const char *debugString;
@@ -698,6 +699,8 @@ void iPxx_Tasks( INTERFACE_DATA *interfaceData )
                                     #else
                                         *pCommandData++ = ACC_Board_EXPLORER16;
                                     #endif
+
+                                        putrs2USART("ACC_InitializeAccessory\r\n");
                                     bytesUsed += 10;
                                 }
                                 break;
@@ -727,6 +730,7 @@ void iPxx_Tasks( INTERFACE_DATA *interfaceData )
                                     *pCommandData++ = interfaceData->buttonState.value;
 
                                     pCommandData += 4;
+                                    putrs2USART("ACC_GetAccessorySwitches\r\n");
                                     bytesUsed += 10;
                                 }
                                 break;
@@ -755,28 +759,35 @@ void iPxx_Tasks( INTERFACE_DATA *interfaceData )
                                     *pCommandData++ = interfaceData->temperatureTenths;
 
                                     pCommandData += 2;
+
+                                    putrs2USART("ACC_GetTemperature\r\n");
                                     bytesUsed += 10;
                                 }
                                 break;
 
                             case ACC_GetDebugInstrum:
 
+                                bytesNeeded = 0;
+                                
                                 debugString = getQueueItem();
 
                                 if (debugString)
                                 {
-                                    /*bytesNeeded = 0;
-                                    do
+                                    putrs2USART(" dequeued string: ");
+                                    puts2USART(debugString);
+                                    bytesNeeded = 0;
+                                    /*do
                                     {
                                         myChar = *debugString;
                                         bytesNeeded++;
                                     }
-                                    while (*debugString++);
+                                    while (*debugString++);*/
 
-                                     */
-                                    
+
+
                                     // Make sure enough bytes are available
-                                    bytesNeeded = strlen(debugString) + 5;
+                                    stringSize = strlen(debugString);
+                                    bytesNeeded = stringSize + 5;
                                     if ( (bytesUsed + bytesNeeded) > ( mfi_iPodApplicationInformation.maxCommandPayloadLengthOut - 4 ) )
                                     {
                                         spaceAvailable = FALSE;
@@ -790,11 +801,12 @@ void iPxx_Tasks( INTERFACE_DATA *interfaceData )
 
                                         *pCommandData++ = ACC_ReturnDebugInstrum;
 
-                                        for (idx=0;idx<bytesNeeded;idx++)
+                                        for (idx=0;idx<stringSize;idx++)
                                         {
                                             *pCommandData++ = debugString[idx];
                                         }
 
+                                        putrs2USART("ACC_GetDebugInstrum\r\n");
                                         bytesUsed += bytesNeeded;
                                     }
                                 }
@@ -823,6 +835,7 @@ void iPxx_Tasks( INTERFACE_DATA *interfaceData )
                                     *pCommandData++ = interfaceData->potentiometer.byte.LB;
 
                                     pCommandData += 3;
+                                    putrs2USART("ACC_GetPotentiometer\r\n");
                                     bytesUsed += 10;
                                 }
                                 break;

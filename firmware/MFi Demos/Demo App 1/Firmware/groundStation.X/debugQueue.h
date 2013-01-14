@@ -19,7 +19,7 @@
 
 // Function Prototypes
 void initQueue();
-void addToQueue(static const rom char *msg);
+void addToQueue(char *msg);
 char* getQueueItem();
 void str2ram(static char *dest, static char rom *src);
 
