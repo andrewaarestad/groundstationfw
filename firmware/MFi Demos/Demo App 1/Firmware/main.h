@@ -197,7 +197,7 @@ typedef struct
     void        InitializeHardware( void );
     void        MonitorPotentiometer( void );
     void        MonitorVBUS( void );
-    void        Rx2Interrup (void);
+    void        RxInterrupt (void);
 
 
     //******************************************************************************

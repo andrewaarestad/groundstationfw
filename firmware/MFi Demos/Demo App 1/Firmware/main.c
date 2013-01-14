@@ -787,7 +787,7 @@ char uart2ReadBuffer[100];
 
 
 //Lets the compiler know that this function is the ISR
-void Rx2Interrup (void)
+void RxInterrupt (void)
 {
     if(DataRdy2USART())
     {
@@ -817,7 +817,6 @@ void main( void )
 int main( void )
 #endif
 {
-    
     // Initialize the system.
     Initialize();
 
@@ -837,6 +836,8 @@ int main( void )
     // Therefore, be sure that this section of code is reached within approximately
     // 2 seconds from power up.
     IPR3bits.RC2IP = 1;      //Make receive interrupt high priority
+
+
     while ( TRUE )
     {
         // This scheduler has not been optimized for maximum throughput, but
