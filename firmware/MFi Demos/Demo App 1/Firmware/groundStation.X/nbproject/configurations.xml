@@ -16,6 +16,7 @@
         <itemPath>../../../../Microchip/Include/MFI/MFI_iPod_UART.h</itemPath>
         <itemPath>../UART/mfi_config.h</itemPath>
         <itemPath>../UART/mfi_handlers.h</itemPath>
+        <itemPath>debugQueue.h</itemPath>
       </logicalFolder>
       <itemPath>../../../../Microchip/Include/Compiler.h</itemPath>
       <itemPath>../../../../Microchip/Include/DebugUARTBuffered.h</itemPath>
@@ -81,6 +82,7 @@
       <itemPath>../iPxx.c</itemPath>
       <itemPath>../main.c</itemPath>
       <itemPath>../PIC18/system.c</itemPath>
+      <itemPath>debugQueue.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"

@@ -114,6 +114,7 @@ Kimberly Otten  25-Oct-2010 v2.04
 
 #define MAIN_C
 #include "main.h"
+#include "./groundStation.X/debugQueue.h"
 
 // *****************************************************************************
 // *****************************************************************************
@@ -774,6 +775,8 @@ void UpdateInformation( const char * newString )
 #endif
 
 
+
+
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
@@ -822,8 +825,6 @@ int main( void )
             MFI_Tasks();
             iPxx_Tasks( &interfaceData );
             MonitorVBUS();
-
-            putrs1USART( "Hello World!\r\n" );
             
         }
         else if (( TickGet() - timeLast100ms ) > ( 100 * dwTicksPerMillisecond ))
@@ -870,6 +871,9 @@ int main( void )
                 #endif
             }
             putrs2USART( "Hello World!\r\n" );
+
+            //addToQueue("AddToQueueTest");
+            //addToQueue("MoreQueueTest");
         }
         else
         {

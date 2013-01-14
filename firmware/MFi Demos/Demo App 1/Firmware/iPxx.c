@@ -30,6 +30,7 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 
 #define IPXX_C
 #include "iPxx.h"
+#include "groundStation.X/debugQueue.h"
 
 // *****************************************************************************
 // *****************************************************************************
@@ -83,6 +84,9 @@ INTERFACE_DATA                  *iPxxInterfaceData;
 UINT8                           iPxxProtocolIndex;
 UINT16                          iPxxSessionID;
 IPXX_STATUS                     iPxxStatus;
+
+
+
 
 //******************************************************************************
 //******************************************************************************
@@ -456,6 +460,13 @@ void iPxx_Tasks( INTERFACE_DATA *interfaceData )
     UINT8   command;
     UINT8   *pCommandData;
 
+    int bytesNeeded;
+    int idx;
+    
+    const char *debugString;
+
+    char myChar;
+
     // Our event handler needs to know where this structure is.
     iPxxInterfaceData = interfaceData;
 
@@ -749,34 +760,45 @@ void iPxx_Tasks( INTERFACE_DATA *interfaceData )
                                 break;
 
                             case ACC_GetDebugInstrum:
-                                // This response requires 17 bytes
-                                if ( (bytesUsed + 17) > ( mfi_iPodApplicationInformation.maxCommandPayloadLengthOut - 4 ) )
-                                {
-                                    spaceAvailable = FALSE;
-                                }
-                                else
-                                {
-                                    *pCommandData++ = HIGH_BYTE( iPxxSessionID );
-                                    *pCommandData++ = LOW_BYTE(  iPxxSessionID );
-                                    *pCommandData++ = SYNC_BYTE_1;
-                                    *pCommandData++ = SYNC_BYTE_2;
 
-                                    *pCommandData++ = ACC_ReturnDebugInstrum;
-                                    *pCommandData++ = 72;
-                                    *pCommandData++ = 101;
-                                    *pCommandData++ = 108;
-                                    *pCommandData++ = 108;
-                                    *pCommandData++ = 111;
-                                    *pCommandData++ = 32;
-                                    *pCommandData++ = 87;
-                                    *pCommandData++ = 111;
-                                    *pCommandData++ = 114;
-                                    *pCommandData++ = 108;
-                                    *pCommandData++ = 100;
-                                    *pCommandData++ = 0x00;
+                                debugString = getQueueItem();
 
-                                    bytesUsed += 17;
+                                if (debugString)
+                                {
+                                    /*bytesNeeded = 0;
+                                    do
+                                    {
+                                        myChar = *debugString;
+                                        bytesNeeded++;
+                                    }
+                                    while (*debugString++);
+
+                                     */
+                                    
+                                    // Make sure enough bytes are available
+                                    bytesNeeded = strlen(debugString) + 5;
+                                    if ( (bytesUsed + bytesNeeded) > ( mfi_iPodApplicationInformation.maxCommandPayloadLengthOut - 4 ) )
+                                    {
+                                        spaceAvailable = FALSE;
+                                    }
+                                    else
+                                    {
+                                        *pCommandData++ = HIGH_BYTE( iPxxSessionID );
+                                        *pCommandData++ = LOW_BYTE(  iPxxSessionID );
+                                        *pCommandData++ = SYNC_BYTE_1;
+                                        *pCommandData++ = SYNC_BYTE_2;
+
+                                        *pCommandData++ = ACC_ReturnDebugInstrum;
+
+                                        for (idx=0;idx<bytesNeeded;idx++)
+                                        {
+                                            *pCommandData++ = debugString[idx];
+                                        }
+
+                                        bytesUsed += bytesNeeded;
+                                    }
                                 }
+                                
                                 break;
 
                             case ACC_ReturnTemperature:
