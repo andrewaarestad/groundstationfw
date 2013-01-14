@@ -787,7 +787,7 @@ char uart2ReadBuffer[100];
 
 
 //Lets the compiler know that this function is the ISR
-void RxInterrup (void)
+void Rx2Interrup (void)
 {
     if(DataRdy2USART())
     {
