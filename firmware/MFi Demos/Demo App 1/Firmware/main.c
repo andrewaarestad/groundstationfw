@@ -801,6 +801,13 @@ void RxInterrup (void)
         //gets2USART(uart2ReadBuffer,100);
         PIR3bits.RC2IF = 0;
     }
+    //Check for errors
+    if(RCSTA2bits.OERR)
+    {
+        //Overrun error, clear it
+        RCSTA2bits.CREN = 0;            // Clear any overflow error that occurred.
+        RCSTA2bits.CREN = 1;
+    }
 }
 
 
