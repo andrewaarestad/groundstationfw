@@ -868,8 +868,9 @@ int main( void )
             #endif
             if(i>0)
             {
-                i = 0;
+                uart2ReadBuffer[i]=0;
                 puts2USART(uart2ReadBuffer);
+                i = 0;
             }
         }
             
