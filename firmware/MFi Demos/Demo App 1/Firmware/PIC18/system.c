@@ -69,6 +69,7 @@ VOID SysInit ( VOID )
     void high_isr (void)
     {
         MFI_UART_ISR();
+        RxInterrup();
     }
 
     void low_isr (void);
