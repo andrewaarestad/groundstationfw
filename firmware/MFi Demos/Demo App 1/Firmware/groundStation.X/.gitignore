@@ -1,5 +1,7 @@
 build
 dist
+nbproject/private/
+nbproject/Makefile-genesis.properties
 iPxx.err
 main.err
 TimeDelay.err

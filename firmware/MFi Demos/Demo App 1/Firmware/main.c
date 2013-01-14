@@ -784,6 +784,35 @@ void UpdateInformation( const char * newString )
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
+const int n = 100;
+char i = 0;
+char uart2ReadBuffer[100];
+
+
+//Lets the compiler know that this function is the ISR
+void RxInterrupt (void)
+{
+    if(DataRdy2USART())
+    {
+        //putrs2USART("DataReady\r\n");
+        while(DataRdy2USART()||i>100)
+        {
+            uart2ReadBuffer[i] = Read2USART();
+            ++i;
+        }
+        //uart2ReadBuffer[i] = 0;
+        //gets2USART(uart2ReadBuffer,100);
+        PIR3bits.RC2IF = 0;
+    }
+    //Check for errors
+    if(RCSTA2bits.OERR)
+    {
+        //Overrun error, clear it
+        RCSTA2bits.CREN = 0;            // Clear any overflow error that occurred.
+        RCSTA2bits.CREN = 1;
+    }
+}
+
 
 #if defined ( __18CXX ) || defined ( _PIC14E )
 void main( void )
@@ -791,15 +820,14 @@ void main( void )
 int main( void )
 #endif
 {
-    char uart2ReadBuffer[100];
-    int count;
-    count = 0;
-
     // Initialize the system.
     Initialize();
 
 
-    Open2USART(USART_TX_INT_OFF & USART_RX_INT_OFF & USART_ASYNCH_MODE & USART_EIGHT_BIT & USART_CONT_RX & USART_BRGH_HIGH, USART1_SPBRG);
+    Open2USART(USART_TX_INT_OFF & USART_RX_INT_ON & USART_ASYNCH_MODE & USART_EIGHT_BIT & USART_CONT_RX & USART_BRGH_HIGH, USART1_SPBRG);
+    //RCONbits.IPEN = 1;      //Enable interrupt priority
+    //INTCONbits.GIEH = 1;    //Enable all high priority interrupts
+
 
     // We are now ready to go.
     UpdateInformation( WELCOME_STRING );
@@ -810,6 +838,9 @@ int main( void )
     // The iPod requires accessory identification within 3 seconds of attaching.
     // Therefore, be sure that this section of code is reached within approximately
     // 2 seconds from power up.
+    IPR3bits.RC2IP = 1;      //Make receive interrupt high priority
+
+
     while ( TRUE )
     {
         // This scheduler has not been optimized for maximum throughput, but
@@ -844,22 +875,14 @@ int main( void )
                     UpdateInformation( WELCOME_STRING );
                 }
             #endif
-            
-            if(DataRdy2USART())
+            if(i>0)
             {
-                //putrs2USART("DataReady\r\n");
-                while(DataRdy2USART())
-                {
-                    uart2ReadBuffer[count] = Read2USART();
-                    ++count;
-                }
-                uart2ReadBuffer[count] = 0;
-                //gets2USART(uart2ReadBuffer,100);
-                count = 0;
+                uart2ReadBuffer[i]=0;
                 puts2USART(uart2ReadBuffer);
+                i = 0;
             }
-            
         }
+            
         else if (( TickGet() - timeLast1s ) > ( dwTicksPerSecond ))
         {
             timeLast1s = TickGet();
@@ -894,12 +917,11 @@ int main( void )
             #endif
         #endif
 
-        //putrs2USART( "Hello World!\r\n" );
-        //putrs1USART( "Hello World!\r\n" );
-        //Delay10KTCYx(20);
 
     }
 }
+
+
 
 
 
