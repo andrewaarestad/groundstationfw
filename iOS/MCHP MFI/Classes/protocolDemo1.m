@@ -84,13 +84,15 @@
 				char requestStatus[] = {0,0,0,0,0,0};
 				[self queueTxBytes:[NSData dataWithBytes:requestStatus length:sizeof(requestStatus)]];
 			}
-			[self queueTxBytes:[NSData dataWithBytes:requestPot length:sizeof(requestPot)]];
+			
 			if ((++c % (int)(1.0/updateRate))==0) // update the temperature once per second
 			{
-				[self queueTxBytes:[NSData dataWithBytes:requestTemp length:sizeof(requestTemp)]];
-				//[self queueTxBytes:[NSData dataWithBytes:requestDebugInstrum length:sizeof(requestDebugInstrum)]];
+                //NSLog(@"Requesting debug instrum...");
+				//[self queueTxBytes:[NSData dataWithBytes:requestTemp length:sizeof(requestTemp)]];
+                //[self queueTxBytes:[NSData dataWithBytes:requestPot length:sizeof(requestPot)]];
+				[self queueTxBytes:[NSData dataWithBytes:requestDebugInstrum length:sizeof(requestDebugInstrum)]];
 			}
-            [self queueTxBytes:[NSData dataWithBytes:requestDebugInstrum length:sizeof(requestDebugInstrum)]];
+        
 		}
 		if (BoardID == MFI_16_BIT_HW) {
 			updateRate = kUPDATERATE_FAST;
