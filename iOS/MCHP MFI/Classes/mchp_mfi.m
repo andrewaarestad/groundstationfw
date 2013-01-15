@@ -243,6 +243,7 @@
     {
         if([txData length])
         {
+            //FIXME this will error out if the Mfi device disconnects unexpectedly
             len = [[eas outputStream] write:[txData bytes] maxLength:[txData length]];
 
             if (len < [txData length])

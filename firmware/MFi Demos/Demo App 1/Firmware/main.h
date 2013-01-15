@@ -92,6 +92,9 @@ typedef struct
 
     UINT8           volume;
 
+    char uartData[20];
+    UINT8 uartLength;
+
     union
     {
         UINT8       value;

@@ -784,9 +784,8 @@ void UpdateInformation( const char * newString )
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
-const int n = 100;
-char i = 0;
-char uart2ReadBuffer[100];
+//char i = 0;
+//char uart2ReadBuffer[100];
 
 
 //Lets the compiler know that this function is the ISR
@@ -795,10 +794,10 @@ void RxInterrupt (void)
     if(DataRdy2USART())
     {
         //putrs2USART("DataReady\r\n");
-        while(DataRdy2USART()||i>100)
+        while(DataRdy2USART()||interfaceData.uartLength>100)
         {
-            uart2ReadBuffer[i] = Read2USART();
-            ++i;
+            interfaceData.uartData[interfaceData.uartLength] = Read2USART();
+            ++interfaceData.uartLength;
         }
         //uart2ReadBuffer[i] = 0;
         //gets2USART(uart2ReadBuffer,100);
@@ -820,6 +819,7 @@ void main( void )
 int main( void )
 #endif
 {
+    int idx = 0;
     // Initialize the system.
     Initialize();
 
@@ -839,8 +839,12 @@ int main( void )
     // Therefore, be sure that this section of code is reached within approximately
     // 2 seconds from power up.
     IPR3bits.RC2IP = 1;      //Make receive interrupt high priority
+    //HACK to turn on UART2 also
+    //RCSTA2              = 0x90;
+    //Nop();
+    //Nop();
 
-
+    //uart2ReadBuffer = 'Test First Message';
     while ( TRUE )
     {
         // This scheduler has not been optimized for maximum throughput, but
@@ -875,12 +879,20 @@ int main( void )
                     UpdateInformation( WELCOME_STRING );
                 }
             #endif
+            /*
             if(i>0)
             {
                 uart2ReadBuffer[i]=0;
-                puts2USART(uart2ReadBuffer);
+                //puts2USART(uart2ReadBuffer);
+                for(idx=0;idx<i;idx++)
+                {
+                    interfaceData.uartData[idx] = uart2ReadBuffer[idx];
+                }
+                interfaceData.uartLength = i;
+
                 i = 0;
             }
+            */
         }
             
         else if (( TickGet() - timeLast1s ) > ( dwTicksPerSecond ))
