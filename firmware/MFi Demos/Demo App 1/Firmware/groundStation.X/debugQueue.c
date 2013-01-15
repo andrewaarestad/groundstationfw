@@ -1,6 +1,6 @@
 
 #include "debugQueue.h"
-
+#include "GenericTypedefs.h"
 
 
 // Global variables
@@ -68,6 +68,17 @@ void str2ram(static char *dest, static char rom *src)
     while((*dest++ = *src++) != '\0');
 }
 
+BOOL debugQueueHasItems()
+{
+    if (debugFifoNumItemsInQueue > 0)
+    {
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
+}
 
 char* getQueueItem()
 {

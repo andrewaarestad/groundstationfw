@@ -789,7 +789,7 @@ char i = 0;
 char uart2ReadBuffer[100];
 
 char stringOneHzTick[] = "1Hz Tick";
-char stringTest[] = "Test";
+char stringTest[] = "TestString";
 char stringOneHzTickUart[] = "1Hz Tick\r\n";
 char stringInitialized[] = "Initialized";
 char stringUartRx[] = "UartRx";
