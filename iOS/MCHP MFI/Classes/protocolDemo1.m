@@ -125,11 +125,8 @@
         
         uint8_t messageType = buf[0];
         
-        uint8_t dataBuffer[expectedNumBytes - 1];
-        for (int bufIdx = 0;bufIdx < expectedNumBytes-1;bufIdx++)
-        {
-            dataBuffer[bufIdx] = buf[bufIdx+1];
-        }
+        
+        
 		// process data received from the accessory
 		switch(messageType)
 		{
@@ -175,7 +172,25 @@
 				break;
             case 21: // ReturnDebugInstrum
                 {
-                    NSLog(@"Received message: %@",[NSString stringWithUTF8String:&dataBuffer]);
+                    //char dataBuffer[expectedNumBytes];
+                    char tempChar;
+                    NSString *message = @"";
+                    for (int bufIdx = 0;bufIdx < expectedNumBytes-1;bufIdx++)
+                    {
+                        tempChar = (char)buf[bufIdx+1];
+                        //NSLog(@"char: %c",tempChar);
+                        message = [NSString stringWithFormat:@"%@%c",message,tempChar];
+                        //dataBuffer[bufIdx] = (char)buf[bufIdx+1];
+                    }
+                    //dataBuffer[expectedNumBytes] = '\0';
+                    
+                    //NSString *parsedMessage = [NSString stringWithUTF8String:(const char *)dataBuffer];
+                    //NSString *parsedMessage = [NSString stringWithCString:(const char *)dataBuffer encoding:NSUTF8StringEncoding];
+                    
+                    // remove final character since stringWithUTF8String converts the trailing NULL to an 'S' for some reason
+                    //NSString *finalMessage = [parsedMessage substringToIndex:[parsedMessage length]-1];
+                    
+                    NSLog(@"Received message: %@",message);
                 }
                 break;
 			default: // unknown command
