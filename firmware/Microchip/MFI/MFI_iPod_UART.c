@@ -156,8 +156,6 @@ Kimberly Otten  22-Jan-2010 v1.0
     void IMFI_UART_Enable( void )
     {
         RCSTA1              = 0x90;
-        //HACK to turn on UART2 also
-        RCSTA2              = 0x90;
         Nop();
         Nop();
     }

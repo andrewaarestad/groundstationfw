@@ -737,6 +737,9 @@ void iPxx_Tasks( INTERFACE_DATA *interfaceData )
                                     //putrs2USART("ACC_GetAccessorySwitches\r\n");
                                     bytesUsed += 10;
                                 }
+                                
+
+
                                 break;
 
                             case ACC_ReturnAccessorySwitches:
@@ -853,6 +856,7 @@ void iPxx_Tasks( INTERFACE_DATA *interfaceData )
 
                             case ACC_GetPotentiometer:
                                 // This response requires 10 bytes
+                                
                                 if ( (bytesUsed + 10) > ( mfi_iPodApplicationInformation.maxCommandPayloadLengthOut - 4 ) )
                                 {
                                     spaceAvailable = FALSE;
@@ -872,6 +876,7 @@ void iPxx_Tasks( INTERFACE_DATA *interfaceData )
                                     //putrs2USART("ACC_GetPotentiometer\r\n");
                                     bytesUsed += 10;
                                 }
+                                                                
                                 break;
 
                             case ACC_ReturnPotentiometer:
@@ -1540,6 +1545,7 @@ BOOL MFI_HandleiPodEvents( MFI_EVENT event, void *data, UINT32 size )
             UpdateInformation( "Buffer overrun" );
             DebugUART_PrintString( "MFI_EVENT_RECEIVE_BUFFER_OVERRUN\r\n" );
             Nop();
+            BlinkIndication( BLINK_PATTERN_ON_OFF, BLINK_INFINITE, 250 );
             #ifdef __DEBUG
                 while (1);
             #endif
