@@ -900,7 +900,7 @@ int main( void )
             }
             //putrs2USART( "Hello World!\r\n" );
 
-            //addToQueue(stringOneHzTick);
+            addToQueue(stringOneHzTick);
             //addToQueue(stringTest);
             if(interfaceData.uartLength>0)
             {
