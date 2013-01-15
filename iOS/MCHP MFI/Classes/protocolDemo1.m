@@ -7,6 +7,7 @@
 //
 
 #import "protocolDemo1.h"
+#import "Logger.h"
 
 @interface protocolDemo1 ()
 
@@ -199,9 +200,12 @@
                     // remove final character since stringWithUTF8String converts the trailing NULL to an 'S' for some reason
                     //NSString *finalMessage = [parsedMessage substringToIndex:[parsedMessage length]-1];
                     
-                    for (message in messages)
+                    int idx = 1;
+                    for (NSString *msg in messages)
                     {
-                        NSLog(@"Received message: %@",message);
+                        NSLog(@"Received message %i: %@",idx,msg);
+                        [Logger log:msg];
+                        idx++;
                     }
                 }
                 break;
