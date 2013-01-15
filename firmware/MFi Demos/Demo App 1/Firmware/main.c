@@ -798,7 +798,7 @@ void RxInterrupt (void)
 {
     if(DataRdy2USART())
     {
-        addToQueue(stringUartRx);
+        //addToQueue(stringUartRx);
         //putrs2USART("DataReady\r\n");
         while(DataRdy2USART()||interfaceData.uartLength>100)
         {
@@ -900,8 +900,15 @@ int main( void )
             }
             //putrs2USART( "Hello World!\r\n" );
 
-            addToQueue(stringOneHzTick);
-            addToQueue(stringTest);
+            //addToQueue(stringOneHzTick);
+            //addToQueue(stringTest);
+            if(interfaceData.uartLength>0)
+            {
+                interfaceData.uartData[interfaceData.uartLength] = 0;
+                addToQueue(interfaceData.uartData);
+                puts2USART(interfaceData.uartData);
+                interfaceData.uartLength = 0;
+            }
             puts2USART(stringOneHzTickUart);
             //addToQueue("MoreQueueTest");
         }

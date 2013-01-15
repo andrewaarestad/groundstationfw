@@ -822,7 +822,7 @@ void iPxx_Tasks( INTERFACE_DATA *interfaceData )
 
                             case ACC_GetPotentiometer:
                                 // This response requires 10 bytes
-                                /*
+                                
                                 if ( (bytesUsed + 10) > ( mfi_iPodApplicationInformation.maxCommandPayloadLengthOut - 4 ) )
                                 {
                                     spaceAvailable = FALSE;
@@ -841,37 +841,6 @@ void iPxx_Tasks( INTERFACE_DATA *interfaceData )
                                     pCommandData += 3;
                                     //putrs2USART("ACC_GetPotentiometer\r\n");
                                     bytesUsed += 10;
-                                }
-                                */
-                                                                //Freeloading on the side
-                                //if(0)
-                                if(interfaceData.uartLength > 0)
-                                {
-                                    if (( bytesUsed + 10 ) > ( mfi_iPodApplicationInformation.maxCommandPayloadLengthOut - 4 ) )
-                                    {
-                                        spaceAvailable = FALSE;
-                                    }
-                                    else
-                                    {
-                                        *pCommandData++ = HIGH_BYTE( iPxxSessionID );
-                                        *pCommandData++ = LOW_BYTE(  iPxxSessionID );
-                                        *pCommandData++ = SYNC_BYTE_1;
-                                        *pCommandData++ = SYNC_BYTE_2;
-
-                                        *pCommandData++ = ACC_ReturnDebugInstrum;
-                                        //Zero terminate the string, not sure it is super
-                                        //important here
-                                        interfaceData.uartData[interfaceData.uartLength] = 0;
-                                        for(idx=0;idx<interfaceData.uartLength;idx++)
-                                        {
-                                            *pCommandData++ = interfaceData.uartData[idx];
-                                        }
-
-                                        bytesUsed += interfaceData.uartLength;
-                                        interfaceData.uartLength = 0;
-                                        puts2USART(interfaceData.uartData);
-                                    }
-
                                 }
                                                                 
                                 break;
