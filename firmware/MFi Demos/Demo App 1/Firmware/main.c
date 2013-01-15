@@ -788,13 +788,18 @@ const int n = 100;
 char i = 0;
 char uart2ReadBuffer[100];
 
-char stringOneHzTick[] = "1Hz Tick\r\n";
+char stringOneHzTick[] = "1Hz Tick";
+char stringTest[] = "Test";
+char stringOneHzTickUart[] = "1Hz Tick\r\n";
+char stringInitialized[] = "Initialized";
+char stringUartRx[] = "UartRx";
 
 //Lets the compiler know that this function is the ISR
 void RxInterrupt (void)
 {
     if(DataRdy2USART())
     {
+        addToQueue(stringUartRx);
         //putrs2USART("DataReady\r\n");
         while(DataRdy2USART()||i>100)
         {
@@ -824,6 +829,7 @@ int main( void )
     // Initialize the system.
     Initialize();
 
+    addToQueue(stringInitialized);
 
     Open2USART(USART_TX_INT_OFF & USART_RX_INT_ON & USART_ASYNCH_MODE & USART_EIGHT_BIT & USART_CONT_RX & USART_BRGH_HIGH, USART1_SPBRG);
     //RCONbits.IPEN = 1;      //Enable interrupt priority
@@ -899,6 +905,8 @@ int main( void )
             //putrs2USART( "Hello World!\r\n" );
 
             addToQueue(stringOneHzTick);
+            addToQueue(stringTest);
+            puts2USART(stringOneHzTickUart);
             //addToQueue("MoreQueueTest");
         }
         else
