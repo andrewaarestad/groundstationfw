@@ -700,7 +700,7 @@ void iPxx_Tasks( INTERFACE_DATA *interfaceData )
                                         *pCommandData++ = ACC_Board_EXPLORER16;
                                     #endif
 
-                                        putrs2USART("ACC_InitializeAccessory\r\n");
+                                        //putrs2USART("ACC_InitializeAccessory\r\n");
                                     bytesUsed += 10;
                                 }
                                 break;
@@ -730,7 +730,7 @@ void iPxx_Tasks( INTERFACE_DATA *interfaceData )
                                     *pCommandData++ = interfaceData->buttonState.value;
 
                                     pCommandData += 4;
-                                    putrs2USART("ACC_GetAccessorySwitches\r\n");
+                                    //putrs2USART("ACC_GetAccessorySwitches\r\n");
                                     bytesUsed += 10;
                                 }
                                 
@@ -763,7 +763,7 @@ void iPxx_Tasks( INTERFACE_DATA *interfaceData )
 
                                     pCommandData += 2;
 
-                                    putrs2USART("ACC_GetTemperature\r\n");
+                                    //putrs2USART("ACC_GetTemperature\r\n");
                                     bytesUsed += 10;
                                 }
                                 break;
@@ -776,8 +776,8 @@ void iPxx_Tasks( INTERFACE_DATA *interfaceData )
 
                                 if (debugString)
                                 {
-                                    putrs2USART(" dequeued string: ");
-                                    puts2USART(debugString);
+                                    //putrs2USART(" dequeued string: ");
+                                    //puts2USART(debugString);
                                     bytesNeeded = 0;
                                     /*do
                                     {
@@ -809,7 +809,7 @@ void iPxx_Tasks( INTERFACE_DATA *interfaceData )
                                             *pCommandData++ = debugString[idx];
                                         }
 
-                                        putrs2USART("ACC_GetDebugInstrum\r\n");
+                                        //putrs2USART("ACC_GetDebugInstrum\r\n");
                                         bytesUsed += bytesNeeded;
                                     }
                                 }
@@ -839,7 +839,7 @@ void iPxx_Tasks( INTERFACE_DATA *interfaceData )
                                     *pCommandData++ = interfaceData->potentiometer.byte.LB;
 
                                     pCommandData += 3;
-                                    putrs2USART("ACC_GetPotentiometer\r\n");
+                                    //putrs2USART("ACC_GetPotentiometer\r\n");
                                     bytesUsed += 10;
                                 }
                                 */
