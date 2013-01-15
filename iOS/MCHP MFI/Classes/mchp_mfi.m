@@ -161,7 +161,14 @@
 			else 
 			{
 				// reset the receiver with the bytes that were not consumed.
-				[rxData setData:[rxData subdataWithRange:r]];
+                if (r.location + r.length <= rxData.length)
+                {
+                    [rxData setData:[rxData subdataWithRange:r]];
+                }
+                else
+                {
+                    NSLog(@"WARNING: Unhandled case of received data, not consumed...");
+                }
 			}
 
 			

@@ -787,6 +787,7 @@ void UpdateInformation( const char * newString )
 //char i = 0;
 //char uart2ReadBuffer[100];
 
+char stringOneHzTick[] = "1Hz Tick\r\n";
 
 //Lets the compiler know that this function is the ISR
 void RxInterrupt (void)
@@ -879,20 +880,6 @@ int main( void )
                     UpdateInformation( WELCOME_STRING );
                 }
             #endif
-            /*
-            if(i>0)
-            {
-                uart2ReadBuffer[i]=0;
-                //puts2USART(uart2ReadBuffer);
-                for(idx=0;idx<i;idx++)
-                {
-                    interfaceData.uartData[idx] = uart2ReadBuffer[idx];
-                }
-                interfaceData.uartLength = i;
-
-                i = 0;
-            }
-            */
         }
             
         else if (( TickGet() - timeLast1s ) > ( dwTicksPerSecond ))
@@ -905,9 +892,9 @@ int main( void )
                     MCP9800_StartRead();
                 #endif
             }
-            putrs2USART( "Hello World!\r\n" );
+            //putrs2USART( "Hello World!\r\n" );
 
-            //addToQueue("AddToQueueTest");
+            addToQueue(stringOneHzTick);
             //addToQueue("MoreQueueTest");
         }
         else
