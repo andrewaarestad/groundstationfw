@@ -174,15 +174,24 @@
                 {
                     //char dataBuffer[expectedNumBytes];
                     char tempChar;
-                    NSString *message = @"";
+                    NSMutableArray *messages = [NSMutableArray arrayWithCapacity:1];
+                    NSString *message = [NSString string];
                     for (int bufIdx = 0;bufIdx < expectedNumBytes-1;bufIdx++)
                     {
                         tempChar = (char)buf[bufIdx+1];
-                        //NSLog(@"char: %c",tempChar);
-                        message = [NSString stringWithFormat:@"%@%c",message,tempChar];
-                        //dataBuffer[bufIdx] = (char)buf[bufIdx+1];
+                        
+                        // Messages are delimited by \0
+                        if (tempChar == '\0')
+                        {
+                            [messages addObject:message];
+                            message = [NSString string];
+                        }
+                        else
+                        {
+                            message = [NSString stringWithFormat:@"%@%c",message,tempChar];
+                        }
                     }
-                    //dataBuffer[expectedNumBytes] = '\0';
+                    [messages addObject:message];
                     
                     //NSString *parsedMessage = [NSString stringWithUTF8String:(const char *)dataBuffer];
                     //NSString *parsedMessage = [NSString stringWithCString:(const char *)dataBuffer encoding:NSUTF8StringEncoding];
@@ -190,7 +199,10 @@
                     // remove final character since stringWithUTF8String converts the trailing NULL to an 'S' for some reason
                     //NSString *finalMessage = [parsedMessage substringToIndex:[parsedMessage length]-1];
                     
-                    NSLog(@"Received message: %@",message);
+                    for (message in messages)
+                    {
+                        NSLog(@"Received message: %@",message);
+                    }
                 }
                 break;
 			default: // unknown command
