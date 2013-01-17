@@ -204,7 +204,7 @@
                     for (NSString *msg in messages)
                     {
                         NSLog(@"Received message %i: %@",idx,msg);
-                        [Logger log:msg];
+                        //[Logger log:msg];
                         idx++;
                     }
                 }
