@@ -78,6 +78,8 @@ typedef union
 
 This data is used by various modules in the system.
 */
+#define UART_BUFFER_SIZE 100
+
 typedef struct
 {
     UINT16_VAL      potentiometer;
@@ -92,8 +94,11 @@ typedef struct
 
     UINT8           volume;
 
-    char uartData[20];
-    UINT8 uartLength;
+    char uartData1[UART_BUFFER_SIZE];
+    char uartData2[UART_BUFFER_SIZE];
+    UINT8 uartActiveBuffer;
+    UINT8 uartData1Length;
+    UINT8 uartData2Length;
 
     union
     {

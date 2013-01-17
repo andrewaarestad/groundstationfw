@@ -496,6 +496,9 @@ void Initialize( void )
     timeLast100ms   = 0;
     timeLast1s      = 0;
 
+    // Initialize UART buffer pointer to buffer 1
+    interfaceData.uartActiveBuffer = 1;
+
     // Initialize the various modules.
     iPxx_InitializeInformation();
     #if defined ( IPOD_BT_UART_MODULE )
@@ -802,8 +805,16 @@ void RxInterrupt (void)
         //putrs2USART("DataReady\r\n");
         while(DataRdy2USART())
         {
-            interfaceData.uartData[interfaceData.uartLength] = Read2USART();
-            ++interfaceData.uartLength;
+            if (interfaceData.uartActiveBuffer == 1)
+            {
+                interfaceData.uartData1[interfaceData.uartData1Length] = Read2USART();
+                ++interfaceData.uartData1Length;
+            }
+            else
+            {
+                interfaceData.uartData2[interfaceData.uartData2Length] = Read2USART();
+                ++interfaceData.uartData2Length;
+            }
         }
         //uart2ReadBuffer[i] = 0;
         //gets2USART(uart2ReadBuffer,100);
@@ -882,13 +893,13 @@ int main( void )
         {
             timeLast100ms = TickGet();
             //putrs1USART("c");
-            if(interfaceData.uartLength>0)
+            /*if(interfaceData.uartLength>0)
             {
                 interfaceData.uartData[interfaceData.uartLength]=0;
                 addToQueue(interfaceData.uartData);
                 puts2USART(interfaceData.uartData);
                 interfaceData.uartLength = 0;
-            }
+            }*/
             CheckButtons();
             if ( interfaceData.flags.bits.dataSessionOpen )
             {
@@ -916,7 +927,7 @@ int main( void )
             }
             //putrs2USART( "Hello World!\r\n" );
 
-            addToQueue(stringOneHzTick);
+            //addToQueue(stringOneHzTick);
         }
         else
         {

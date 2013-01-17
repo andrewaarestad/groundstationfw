@@ -92,6 +92,9 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
     #define ACC_GetDebugInstrum                 20
     #define ACC_ReturnDebugInstrum              21
 
+    #define ACC_GetMavLinkData                  30
+    #define ACC_ReturnMavLinkData               31
+
     #define ACC_Board_PIC18                     2
     #define ACC_Board_EXPLORER16                3
 

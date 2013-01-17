@@ -465,6 +465,10 @@ void iPxx_Tasks( INTERFACE_DATA *interfaceData )
     int idx;
     int debugBytesAdded;
 
+    int byteIdx;    // used for copying uart buffer bytes into send buffer
+    int bytesLeftInUartBuffer;
+
+
     BOOL lastStringWasAddedToBuffer;
     BOOL isFirstString;
     
@@ -880,6 +884,72 @@ void iPxx_Tasks( INTERFACE_DATA *interfaceData )
                                 break;
 
                             case ACC_ReturnPotentiometer:
+                                // Will not be received by the accessory.
+                                break;
+
+                            case ACC_GetMavLinkData:
+                                
+                                // This response requires at least 10 bytes
+                                if (interfaceData.uartActiveBuffer == 1) {
+                                    bytesLeftInUartBuffer = interfaceData.uartData1Length;
+                                } else {
+                                    bytesLeftInUartBuffer = interfaceData.uartData2Length;
+                                }
+
+                                if (bytesLeftInUartBuffer > 0)
+                                {
+                                    if ( (bytesUsed + 10) > ( mfi_iPodApplicationInformation.maxCommandPayloadLengthOut - 4 ) )
+                                    {
+                                        spaceAvailable = FALSE;
+                                    }
+                                    else
+                                    {
+                                        // Switch uart receiver buffer in case this code gets interrupted
+                                        if (interfaceData.uartActiveBuffer == 1) {
+                                            interfaceData.uartActiveBuffer = 2;
+                                        } else {
+                                            interfaceData.uartActiveBuffer = 1;
+                                        }
+
+                                        *pCommandData++ = HIGH_BYTE( iPxxSessionID );
+                                        *pCommandData++ = LOW_BYTE(  iPxxSessionID );
+                                        *pCommandData++ = SYNC_BYTE_1;
+                                        *pCommandData++ = SYNC_BYTE_2;
+
+                                        *pCommandData++ = ACC_ReturnMavLinkData;
+
+                                        bytesUsed += 5;
+
+                                        // This code does not handle the case where there is more data in the uart buffer than fits in the send buffer
+                                        byteIdx = 0;
+
+                                        while (bytesUsed + 1 <= (mfi_iPodApplicationInformation.maxCommandPayloadLengthOut - 4) && bytesLeftInUartBuffer > 0)
+                                        {
+                                            // uart active buffer was changed above, so check opposite of what is active
+                                            if (interfaceData.uartActiveBuffer == 1) {
+                                                *pCommandData++ = interfaceData.uartData2[byteIdx];
+                                            } else {
+                                                *pCommandData++ = interfaceData.uartData1[byteIdx];
+                                            }
+
+                                            byteIdx += 1;
+                                            bytesUsed += 1;
+                                            bytesLeftInUartBuffer--;
+                                        }
+
+                                        // reset buffer
+                                        if (interfaceData.uartActiveBuffer == 1) {
+                                            interfaceData.uartData2Length = 0;
+                                        } else {
+                                            interfaceData.uartData1Length = 0;
+                                        }
+
+                                    }
+                                }
+
+                                break;
+
+                            case ACC_ReturnMavLinkData:
                                 // Will not be received by the accessory.
                                 break;
 
