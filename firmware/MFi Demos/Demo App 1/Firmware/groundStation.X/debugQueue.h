@@ -4,6 +4,7 @@
  *
  * Created on January 13, 2013, 2:48 PM
  */
+#include "GenericTypeDefs.h"
 
 #ifndef DEBUGQUEUE_H
 #define	DEBUGQUEUE_H
@@ -22,7 +23,7 @@ void initQueue();
 void addToQueue(char *msg);
 char* getQueueItem();
 void str2ram(static char *dest, static char rom *src);
-
+BOOL debugQueueHasItems();
 
 
 

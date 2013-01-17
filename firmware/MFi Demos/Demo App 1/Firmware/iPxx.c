@@ -463,6 +463,10 @@ void iPxx_Tasks( INTERFACE_DATA *interfaceData )
     int bytesNeeded;
     int stringSize;
     int idx;
+    int debugBytesAdded;
+
+    BOOL lastStringWasAddedToBuffer;
+    BOOL isFirstString;
     
     const char *debugString;
 
@@ -770,49 +774,77 @@ void iPxx_Tasks( INTERFACE_DATA *interfaceData )
 
                             case ACC_GetDebugInstrum:
 
-                                bytesNeeded = 0;
-                                
-                                debugString = getQueueItem();
-
-                                if (debugString)
+                                if (debugQueueHasItems())
                                 {
-                                    //putrs2USART(" dequeued string: ");
-                                    //puts2USART(debugString);
-                                    bytesNeeded = 0;
-                                    /*do
+                                    debugBytesAdded = 0;
+                                    isFirstString = TRUE;
+
+                                    lastStringWasAddedToBuffer = TRUE;
+                                    while(debugQueueHasItems() && lastStringWasAddedToBuffer)
                                     {
-                                        myChar = *debugString;
-                                        bytesNeeded++;
-                                    }
-                                    while (*debugString++);*/
+                                        debugString = getQueueItem();
 
-
-
-                                    // Make sure enough bytes are available
-                                    stringSize = strlen(debugString);
-                                    bytesNeeded = stringSize + 5;
-                                    if ( (bytesUsed + bytesNeeded) > ( mfi_iPodApplicationInformation.maxCommandPayloadLengthOut - 4 ) )
-                                    {
-                                        spaceAvailable = FALSE;
-                                    }
-                                    else
-                                    {
-                                        *pCommandData++ = HIGH_BYTE( iPxxSessionID );
-                                        *pCommandData++ = LOW_BYTE(  iPxxSessionID );
-                                        *pCommandData++ = SYNC_BYTE_1;
-                                        *pCommandData++ = SYNC_BYTE_2;
-
-                                        *pCommandData++ = ACC_ReturnDebugInstrum;
-
-                                        for (idx=0;idx<stringSize;idx++)
+                                        if (debugString)
                                         {
-                                            *pCommandData++ = debugString[idx];
+                                            stringSize = strlen(debugString);
+
+                                            // First string will have header
+                                            if (isFirstString)
+                                            {
+                                                bytesNeeded = stringSize + 5;
+                                            }
+                                            else
+                                            {
+                                                bytesNeeded = stringSize + 1;
+                                            }
+
+                                            // If there's room, add to buffer
+                                            if ( (bytesUsed + bytesNeeded) > ( mfi_iPodApplicationInformation.maxCommandPayloadLengthOut - 4 ) )
+                                            {
+                                                spaceAvailable = FALSE;
+                                                lastStringWasAddedToBuffer = FALSE;
+                                            }
+                                            else
+                                            {
+                                                if (isFirstString)
+                                                {
+                                                    // Add header if first string
+                                                    *pCommandData++ = HIGH_BYTE( iPxxSessionID );
+                                                    *pCommandData++ = LOW_BYTE(  iPxxSessionID );
+                                                    *pCommandData++ = SYNC_BYTE_1;
+                                                    *pCommandData++ = SYNC_BYTE_2;
+
+                                                    *pCommandData++ = ACC_ReturnDebugInstrum;
+
+                                                    isFirstString = FALSE;
+                                                    debugBytesAdded += 5;
+                                                }
+                                                else
+                                                {
+                                                    // Add delimiter for subsequent strings
+                                                    *pCommandData++ = '\0';
+                                                }
+                                                // Add string
+                                                for (idx=0;idx<stringSize;idx++)
+                                                {
+                                                    *pCommandData++ = debugString[idx];
+                                                    debugBytesAdded++;
+                                                }
+                                                bytesUsed += bytesNeeded;
+                                            }
                                         }
+                                        else
+                                        {
+                                            // This shouldn't happen but if so, terminate addition to buffer
+                                            lastStringWasAddedToBuffer = FALSE;
+                                        }
+                                    }
 
-                                        //putrs2USART("ACC_GetDebugInstrum\r\n");
-                                        //bytesUsed += bytesNeeded;
-                                        bytesUsed += 10;
-
+                                    // Need to round up to at least 10 total bytes (incl 5 header bytes)
+                                    if (debugBytesAdded < 10)
+                                    {
+                                        pCommandData += (10-debugBytesAdded);
+                                        bytesUsed += (10-debugBytesAdded);
                                     }
                                 }
                                 

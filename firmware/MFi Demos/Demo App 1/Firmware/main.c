@@ -788,7 +788,7 @@ void UpdateInformation( const char * newString )
 //char uart2ReadBuffer[100];
 
 char stringOneHzTick[] = "1Hz Tick";
-char stringTest[] = "Test";
+char stringTest[] = "TestString";
 char stringOneHzTickUart[] = "1Hz Tick\r\n";
 char stringInitialized[] = "Initialized";
 char stringUartRx[] = "UartRx";
@@ -907,7 +907,7 @@ int main( void )
             }
             //putrs2USART( "Hello World!\r\n" );
 
-            //addToQueue(stringOneHzTick);
+            addToQueue(stringOneHzTick);
             //addToQueue(stringTest);
             if(interfaceData.uartLength>0)
             {

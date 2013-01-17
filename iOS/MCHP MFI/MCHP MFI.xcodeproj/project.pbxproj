@@ -22,6 +22,7 @@
 		2899E5220DE3E06400AC0155 /* MCHP_MFIViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2899E5210DE3E06400AC0155 /* MCHP_MFIViewController.xib */; };
 		28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD733E0D9D9553002E5188 /* MainWindow.xib */; };
 		28D7ACF80DDB3853001CB0EB /* MCHP_MFIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D7ACF70DDB3853001CB0EB /* MCHP_MFIViewController.m */; };
+		4923C45416A534D200D37090 /* Logger.m in Sources */ = {isa = PBXBuildFile; fileRef = 4923C45316A534D200D37090 /* Logger.m */; };
 		5F6FD57516A369530046D7D1 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5F6FD57416A369530046D7D1 /* Default-568h@2x.png */; };
 		D84C5F8C117D269A0096C295 /* icon_ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = D84C5F8A117D269A0096C295 /* icon_ipad.png */; };
 		D84C5F8D117D269A0096C295 /* icon_ipod.png in Resources */ = {isa = PBXBuildFile; fileRef = D84C5F8B117D269A0096C295 /* icon_ipod.png */; };
@@ -59,6 +60,8 @@
 		28D7ACF70DDB3853001CB0EB /* MCHP_MFIViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCHP_MFIViewController.m; sourceTree = "<group>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		32CA4F630368D1EE00C91783 /* MCHP_MFI_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCHP_MFI_Prefix.pch; sourceTree = "<group>"; };
+		4923C45216A534D200D37090 /* Logger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Logger.h; sourceTree = "<group>"; };
+		4923C45316A534D200D37090 /* Logger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Logger.m; sourceTree = "<group>"; };
 		5F6FD57416A369530046D7D1 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* MCHP_MFI-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "MCHP_MFI-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 		D84C5F8A117D269A0096C295 /* icon_ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_ipad.png; sourceTree = "<group>"; };
@@ -98,6 +101,7 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				4923C45016A5346C00D37090 /* Logging */,
 				DD7C6D1E11C5AEFD0009DECB /* Views */,
 				DD7C6D1D11C5AEE80009DECB /* MFI Driver */,
 				D8BC264E1173CD3000BA7F4F /* Common Classes */,
@@ -164,6 +168,15 @@
 				288765A40DF7441C002DB57D /* CoreGraphics.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		4923C45016A5346C00D37090 /* Logging */ = {
+			isa = PBXGroup;
+			children = (
+				4923C45216A534D200D37090 /* Logger.h */,
+				4923C45316A534D200D37090 /* Logger.m */,
+			);
+			path = Logging;
 			sourceTree = "<group>";
 		};
 		D8BC264E1173CD3000BA7F4F /* Common Classes */ = {
@@ -308,6 +321,7 @@
 				D8BE0DBA1173A76D007A21C7 /* splashView.m in Sources */,
 				DD86714111C18B3C006BB416 /* mchp_mfi.m in Sources */,
 				DD86719511C20C58006BB416 /* protocolDemo1.m in Sources */,
+				4923C45416A534D200D37090 /* Logger.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
