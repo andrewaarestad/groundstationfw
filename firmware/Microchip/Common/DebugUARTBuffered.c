@@ -219,7 +219,10 @@ BUT NOT LIMITED TO ANY DEFENSE THEREOF), OR OTHER SIMILAR COSTS.
 #else
 
     void DebugUART_InitializeLogging ( void ) {}
-    void DebugUART_PrintString ( const char* msg ) {}
+    void DebugUART_PrintString ( const char* msg ) 
+    {
+        //putrs2USART(msg);
+    }
     void DebugUART_PutChar ( char c ) {}
     void DebugUART_PutHex ( int x ) {}
     void DebugUART_StartLogging ( void ) {}

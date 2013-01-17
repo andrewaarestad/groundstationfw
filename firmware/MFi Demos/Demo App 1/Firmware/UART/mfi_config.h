@@ -41,9 +41,9 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 // iPod Communication Interface
 
 #define IPOD_USE_UART
-//Using 10Mhz clock only 19200 works
-//#define IPOD_UART_BAUD_RATE (57600ul)
-#define IPOD_UART_BAUD_RATE (192000ul)
+#define IPOD_UART_BAUD_RATE (57600ul)
+//Using 8Mhz clock only 19200 works
+//#define IPOD_UART_BAUD_RATE (19200ul)
 #define IPOD_COMMAND_PAYLOAD_SIZE_IN            136
 #define IPOD_COMMAND_PAYLOAD_SIZE_OUT           136
 #define IPOD_OPERATIONAL_PARAMETERS_BYTE0       0x00
@@ -52,8 +52,6 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 #define IPOD_CP_INTERFACE                       0x20
 //Original value
 #define IPOD_CP_FREQUENCY                       (40000ul)
-//HACK using external 8MHz clock
-//#define IPOD_CP_FREQUENCY                       (80000ul)
 
 #define IPOD_COMMAND_DELAY_IDL                  0
 #define IPOD_COMMAND_DELAY                      0
