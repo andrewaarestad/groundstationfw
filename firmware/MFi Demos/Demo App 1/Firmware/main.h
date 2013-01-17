@@ -266,6 +266,7 @@ void        BlinkIndication( BLINK_PATTERNS pattern, UINT8 repetitions, UINT16 r
 #if !defined( LCD_AVAILABLE )
     #define LCDInit()
     #define UpdateInformation(x)
+    //void    UpdateInformation( const char * newString );
 #else
     void    UpdateInformation( const char * newString );
 #endif

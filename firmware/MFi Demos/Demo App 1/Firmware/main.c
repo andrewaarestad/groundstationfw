@@ -818,6 +818,12 @@ void RxInterrupt (void)
     }
 }
 
+/*
+void    UpdateInformation( const char * newString )
+{
+    putrs2USART(newString);
+}
+*/
 
 #if defined ( __18CXX ) || defined ( _PIC14E )
 void main( void )
@@ -831,7 +837,7 @@ int main( void )
 
     addToQueue(stringInitialized);
 
-    Open2USART(USART_TX_INT_OFF & USART_RX_INT_ON & USART_ASYNCH_MODE & USART_EIGHT_BIT & USART_CONT_RX & USART_BRGH_HIGH, USART1_SPBRG);
+    Open2USART(USART_TX_INT_OFF & USART_RX_INT_OFF & USART_ASYNCH_MODE & USART_EIGHT_BIT & USART_CONT_RX & USART_BRGH_HIGH, USART1_SPBRG);
     //RCONbits.IPEN = 1;      //Enable interrupt priority
     //INTCONbits.GIEH = 1;    //Enable all high priority interrupts
 
@@ -869,10 +875,11 @@ int main( void )
             MonitorVBUS();
             
         }
+        //100ms tick
         else if (( TickGet() - timeLast100ms ) > ( 100 * dwTicksPerMillisecond ))
         {
             timeLast100ms = TickGet();
-
+            //putrs1USART("c");
             CheckButtons();
             if ( interfaceData.flags.bits.dataSessionOpen )
             {
@@ -906,10 +913,10 @@ int main( void )
             {
                 interfaceData.uartData[interfaceData.uartLength] = 0;
                 addToQueue(interfaceData.uartData);
-                puts2USART(interfaceData.uartData);
+                //puts2USART(interfaceData.uartData);
                 interfaceData.uartLength = 0;
             }
-            puts2USART(stringOneHzTickUart);
+            //puts2USART(stringOneHzTickUart);
             //addToQueue("MoreQueueTest");
         }
         else

@@ -1054,21 +1054,21 @@ BOOL MFI_HandleiPodEvents( MFI_EVENT event, void *data, UINT32 size )
             // Cannot send the extra current configuration message to  the iPod (USB only).
             DebugUART_PrintString( "MFI_EVENT_CANNOT_SET_EXTRA_CURRENT\r\n" );
             UpdateInformation( "Cannot configure current" );
-            BlinkIndication( BLINK_PATTERN_ON_OFF, 5, BLINK_RATE_ERROR );
+            BlinkIndication( BLINK_PATTERN_ON_OFF, 6, BLINK_RATE_ERROR );
             break;
 
         case MFI_EVENT_GENERAL_ERROR:
             // General USB error.
             DebugUART_PrintString( "MFI_EVENT_GENERAL_ERROR\r\n" );
             UpdateInformation( "Error -  redock iPod" );
-            BlinkIndication( BLINK_PATTERN_ON_OFF, 5, BLINK_RATE_ERROR );
+            BlinkIndication( BLINK_PATTERN_ON_OFF, 7, BLINK_RATE_ERROR );
             break;
 
         case MFI_EVENT_FATAL_ERROR:
             // Fatal USB error.
             DebugUART_PrintString( "MFI_EVENT_FATAL_ERROR\r\n" );
             UpdateInformation( "Fatal system    error" );
-            BlinkIndication( BLINK_PATTERN_ON_OFF, 5, BLINK_RATE_ERROR );
+            BlinkIndication( BLINK_PATTERN_ON_OFF, 8, BLINK_RATE_ERROR );
             break;
 
         case MFI_EVENT_IPOD_ATTACHED:
@@ -1105,7 +1105,7 @@ BOOL MFI_HandleiPodEvents( MFI_EVENT event, void *data, UINT32 size )
             DebugUART_PrintString( "MFI_EVENT_IDPS_NOT_SUPPORTED\r\n" );
             UpdateInformation( "IDPS not supported" );
             iPxxStatus.flags.bits.errorMessageDisplayed = 1;
-            BlinkIndication( BLINK_PATTERN_ON_OFF, 5, BLINK_RATE_ERROR );
+            BlinkIndication( BLINK_PATTERN_ON_OFF, 9, BLINK_RATE_ERROR );
             return FALSE;
             break;
 
@@ -1116,7 +1116,7 @@ BOOL MFI_HandleiPodEvents( MFI_EVENT event, void *data, UINT32 size )
             DebugUART_PrintString( "MFI_EVENT_LINGO_NOT_SUPPORTED\r\n" );
             UpdateInformation( "No lingo support" );
             iPxxStatus.flags.bits.errorMessageDisplayed = 1;
-            BlinkIndication( BLINK_PATTERN_ON_OFF, 5, BLINK_RATE_ERROR );
+            BlinkIndication( BLINK_PATTERN_ON_OFF, 10, BLINK_RATE_ERROR );
             return FALSE;
             break;
 
@@ -1135,7 +1135,7 @@ BOOL MFI_HandleiPodEvents( MFI_EVENT event, void *data, UINT32 size )
                 {
                     UpdateInformation( "Apps not supported" );
                     iPxxStatus.flags.bits.errorMessageDisplayed = 1;
-                    BlinkIndication( BLINK_PATTERN_ON_OFF, 5, BLINK_RATE_ERROR );
+                    BlinkIndication( BLINK_PATTERN_ON_OFF, 11, BLINK_RATE_ERROR );
                     return FALSE;
                 }
                 iPxxStatus.flags.bits.tryOldAutolaunchRequest = 0;
@@ -1199,18 +1199,21 @@ BOOL MFI_HandleiPodEvents( MFI_EVENT event, void *data, UINT32 size )
             DebugUART_PrintString( "MFI_EVENT_IPOD_CANNOT_CONNECT\r\n" );
             if ( size == IPOD_ERROR_MAX_CONNECTIONS )
             {
+                //putrs2USART("OS connect error max connections");
                 UpdateInformation( "OS connect error max connections" );
             }
             else if ( size == IPOD_ERROR_FID_TOKEN_PROBLEM )
             {
+                //putrs2USART("OS connect error token problem");
                 UpdateInformation( "OS connect error token problem" );
             }
             else
             {
+                //putrs2USART("OS connect error");
                 UpdateInformation( "OS connect error" );
             }
             iPxxStatus.flags.bits.errorMessageDisplayed = 1;
-            BlinkIndication( BLINK_PATTERN_ON_OFF, 5, BLINK_RATE_ERROR );
+            BlinkIndication( BLINK_PATTERN_ON_OFF, 2, BLINK_RATE_ERROR );
             break;
 
         case MFI_EVENT_IDPS_FAILURE:
@@ -1222,7 +1225,7 @@ BOOL MFI_HandleiPodEvents( MFI_EVENT event, void *data, UINT32 size )
                 // the driver to abandon it.  So only update the message if it
                 // is new information.
                 UpdateInformation( "IDPS failed" );
-                BlinkIndication( BLINK_PATTERN_ON_OFF, 5, BLINK_RATE_ERROR );
+                BlinkIndication( BLINK_PATTERN_ON_OFF, 13, BLINK_RATE_ERROR );
             }
             iPxxStatus.flags.bits.errorMessageDisplayed = 0;
             break;
@@ -1262,7 +1265,7 @@ BOOL MFI_HandleiPodEvents( MFI_EVENT event, void *data, UINT32 size )
                     UpdateInformation( "Auth failed" );
                     break;
             }
-            BlinkIndication( BLINK_PATTERN_ON_OFF, 5, BLINK_RATE_ERROR );
+            BlinkIndication( BLINK_PATTERN_ON_OFF, 14, BLINK_RATE_ERROR );
             break;
 
         case MFI_EVENT_IPOD_READY:
@@ -1282,7 +1285,7 @@ BOOL MFI_HandleiPodEvents( MFI_EVENT event, void *data, UINT32 size )
             else
             {
                 UpdateInformation( "Unsupported iPod" );
-                BlinkIndication( BLINK_PATTERN_ON_OFF, 5, BLINK_RATE_ERROR );
+                BlinkIndication( BLINK_PATTERN_ON_OFF, 15, BLINK_RATE_ERROR );
             }
             break;
 

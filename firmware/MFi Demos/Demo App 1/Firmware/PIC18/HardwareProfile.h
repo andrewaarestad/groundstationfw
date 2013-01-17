@@ -42,7 +42,9 @@ Author          Date    Comments
 //******************************************************************************
 
 //Turn on PLL and increase the baudrate
-#define GetSystemClock()                    8000000UL
+//#define GetSystemClock()                    8000000UL
+#define GetSystemClock()                    12000000UL
+
 #define GetPeripheralClock()                (GetSystemClock() / 4)
 #define GetInstructionClock()               (GetSystemClock() / 4)
 
