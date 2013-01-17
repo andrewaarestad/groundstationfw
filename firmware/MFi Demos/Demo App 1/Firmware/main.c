@@ -839,7 +839,7 @@ int main( void )
 
     addToQueue(stringInitialized);
 
-    Open2USART(USART_TX_INT_OFF & USART_RX_INT_OFF & USART_ASYNCH_MODE & USART_EIGHT_BIT & USART_CONT_RX & USART_BRGH_HIGH, USART1_SPBRG);
+    Open2USART(USART_TX_INT_OFF & USART_RX_INT_ON & USART_ASYNCH_MODE & USART_EIGHT_BIT & USART_CONT_RX & USART_BRGH_HIGH, USART1_SPBRG);
     //RCONbits.IPEN = 1;      //Enable interrupt priority
     //INTCONbits.GIEH = 1;    //Enable all high priority interrupts
 
@@ -867,7 +867,7 @@ int main( void )
         // between the acccessory and the Apple Device, you may want to move
         // MFI_Tasks and iPxx_Tasks to the default case, so it is executed whenever
         // possible.
-        
+        //10ms tick
         if (( TickGet() - timeLast10ms ) > ( 10 * dwTicksPerMillisecond ))
         {
             timeLast10ms = TickGet();
@@ -882,6 +882,13 @@ int main( void )
         {
             timeLast100ms = TickGet();
             //putrs1USART("c");
+            if(interfaceData.uartLength>0)
+            {
+                interfaceData.uartData[interfaceData.uartLength]=0;
+                addToQueue(interfaceData.uartData);
+                puts2USART(interfaceData.uartData);
+                interfaceData.uartLength = 0;
+            }
             CheckButtons();
             if ( interfaceData.flags.bits.dataSessionOpen )
             {
@@ -910,16 +917,6 @@ int main( void )
             //putrs2USART( "Hello World!\r\n" );
 
             addToQueue(stringOneHzTick);
-            //addToQueue(stringTest);
-            if(interfaceData.uartLength>0)
-            {
-                interfaceData.uartData[interfaceData.uartLength] = 0;
-                addToQueue(interfaceData.uartData);
-                //puts2USART(interfaceData.uartData);
-                interfaceData.uartLength = 0;
-            }
-            //puts2USART(stringOneHzTickUart);
-            //addToQueue("MoreQueueTest");
         }
         else
         {
