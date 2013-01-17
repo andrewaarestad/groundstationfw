@@ -800,7 +800,7 @@ void RxInterrupt (void)
     {
         //addToQueue(stringUartRx);
         //putrs2USART("DataReady\r\n");
-        while(DataRdy2USART()||interfaceData.uartLength>100)
+        while(DataRdy2USART())
         {
             interfaceData.uartData[interfaceData.uartLength] = Read2USART();
             ++interfaceData.uartLength;
@@ -810,12 +810,14 @@ void RxInterrupt (void)
         PIR3bits.RC2IF = 0;
     }
     //Check for errors
+    /*
     if(RCSTA2bits.OERR)
     {
         //Overrun error, clear it
         RCSTA2bits.CREN = 0;            // Clear any overflow error that occurred.
         RCSTA2bits.CREN = 1;
     }
+    */
 }
 
 /*
