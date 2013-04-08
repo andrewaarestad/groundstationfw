@@ -801,18 +801,20 @@ void RxInterrupt (void)
 {
     if(DataRdy2USART())
     {
-        //addToQueue(stringUartRx);
+        addToQueue(stringUartRx);
         //putrs2USART("DataReady\r\n");
         while(DataRdy2USART())
         {
             if (interfaceData.uartActiveBuffer == 1)
             {
                 interfaceData.uartData1[interfaceData.uartData1Length] = Read2USART();
+                puts2USART(interfaceData.uartData1[interfaceData.uartData1Length]);
                 ++interfaceData.uartData1Length;
             }
             else
             {
                 interfaceData.uartData2[interfaceData.uartData2Length] = Read2USART();
+                puts2USART(interfaceData.uartData2[interfaceData.uartData2Length]);
                 ++interfaceData.uartData2Length;
             }
         }
@@ -925,7 +927,7 @@ int main( void )
                     MCP9800_StartRead();
                 #endif
             }
-            //putrs2USART( "Hello World!\r\n" );
+            putrs2USART( "Hello World!\r\n" );
 
             //addToQueue(stringOneHzTick);
         }

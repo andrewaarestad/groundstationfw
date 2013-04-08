@@ -1,4 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/1"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/1">
+        <file>file:/Users/andrew/Software/groundstation/firmware/walrusFW/firmware/MFi%20Demos/Demo%20App%201/Firmware/main.c</file>
+        <file>file:/Users/andrew/Software/groundstation/firmware/walrusFW/firmware/Microchip/Common/TimeDelay.c</file>
+        <file>file:/Users/andrew/Software/groundstation/firmware/walrusFW/firmware/MFi%20Demos/Demo%20App%201/Firmware/iPxx.c</file>
+        <file>file:/Users/andrew/Software/groundstation/firmware/walrusFW/firmware/MFi%20Demos/Demo%20App%201/Firmware/PIC18/HardwareProfile.h</file>
+        <file>file:/Users/andrew/Software/groundstation/firmware/walrusFW/firmware/Microchip/Include/MFI/MFI_iPod.h</file>
+        <file>file:/Users/andrew/Software/groundstation/firmware/walrusFW/firmware/Microchip/MFI/I2C%20PIC18/I2CPrivate.h</file>
+        <file>file:/Users/andrew/Software/groundstation/firmware/walrusFW/firmware/Microchip/Include/MFI/I2C%20PIC18/i2c.h</file>
+        <file>file:/Users/andrew/Software/groundstation/firmware/walrusFW/firmware/Microchip/MFI/I2C%20PIC18/I2CEnable.c</file>
+        <file>file:/Users/andrew/Software/groundstation/firmware/walrusFW/firmware/MFi%20Demos/Demo%20App%201/Firmware/UART/mfi_config.h</file>
+        <file>file:/Users/andrew/Software/groundstation/firmware/walrusFW/firmware/MFi%20Demos/Demo%20App%201/Firmware/Tick.c</file>
+    </open-files>
 </project-private>

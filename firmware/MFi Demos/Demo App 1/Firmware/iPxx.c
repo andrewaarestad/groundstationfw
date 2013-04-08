@@ -254,14 +254,16 @@ BOOL iPxx_Initialize( INTERFACE_DATA *interfaceData )
         if (initializationReturn == IPOD_CP_ERROR)
         {
             UpdateInformation( "CP access problem" );
+            BlinkIndication( BLINK_PATTERN_ON_OFF, BLINK_INFINITE, 50 );
         }
         else
         {
             UpdateInformation( "Cannot initialize" );
+            BlinkIndication( BLINK_PATTERN_ON_OFF, BLINK_INFINITE, 1 );
         }
 
         // Hold here.  Flash the LED's so we know there is a problem.
-        BlinkIndication( BLINK_PATTERN_ON_OFF, BLINK_INFINITE, 500 );
+        
     }
 
     return IPXX_SUCCESS;
@@ -944,6 +946,8 @@ void iPxx_Tasks( INTERFACE_DATA *interfaceData )
                                             interfaceData.uartData1Length = 0;
                                         }
 
+                                        //putrs2USART("Sent MavLink to iOS host.");
+
                                     }
                                 }
 
@@ -1147,10 +1151,10 @@ BOOL MFI_HandleiPodEvents( MFI_EVENT event, void *data, UINT32 size )
             // too much time here.
             DebugUART_PrintString( "MFI_EVENT_IPOD_ATTACHED\r\n" );
             UpdateInformation( " iPod attached" );
-            BlinkIndication( BLINK_PATTERN_BROKEN_THIRDS, 2, 30 );
+            BlinkIndication( BLINK_PATTERN_ON_OFF, 1, 5 );
             break;
 
-        case MFI_EVENT_IPOD_DETACHED:
+        case MFI_EVENT_IPOD_DETACHED:BlinkIndication( BLINK_PATTERN_ON_OFF, 1, 5 );
             // The iPod has detached.
             DebugUART_PrintString( "MFI_EVENT_IPOD_DETACHED\r\n" );
             #if defined( IPOD_USE_UART ) && ! defined( IPOD_USE_BLUETOOTH )
@@ -1167,6 +1171,9 @@ BOOL MFI_HandleiPodEvents( MFI_EVENT event, void *data, UINT32 size )
             // We might have had to reconfigure ourselves for the specific attached device.
             // Set the application information back to its default values.
             iPxx_InitializeInformation();
+
+            BlinkIndication( BLINK_PATTERN_ON_OFF, 2, 5 );
+            
             break;
 
         case MFI_EVENT_IDPS_NOT_SUPPORTED:

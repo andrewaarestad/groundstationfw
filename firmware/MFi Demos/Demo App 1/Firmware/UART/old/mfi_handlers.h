@@ -27,7 +27,7 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 ********************************************************************************
 */
 
-// Created by the Microchip MFi Library SW320411 Configuration Utility, Version 3.05.00.00, 4/7/2013, 1:56:09
+// Created by the Microchip MFi Library SW320411 Configuration Utility, Version 3.05.00.00, 3/29/2013, 15:20:28
 
 #ifndef _MFI_HANDLERS_H
 #define _MFI_HANDLERS_H

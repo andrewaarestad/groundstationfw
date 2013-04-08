@@ -27,7 +27,7 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 ********************************************************************************
 */
 
-// Created by the Microchip MFi Library SW320411 Configuration Utility, Version 3.05.00.00, 4/7/2013, 1:56:09
+// Created by the Microchip MFi Library SW320411 Configuration Utility, Version 3.05.00.00, 3/29/2013, 15:20:28
 
 #ifndef _MFI_CONFIG_H_
 #define _MFI_CONFIG_H_
@@ -46,7 +46,7 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 #define IPOD_COMMAND_PAYLOAD_SIZE_OUT           136
 #define IPOD_OPERATIONAL_PARAMETERS_BYTE0       0x00
 #define IPOD_OPERATIONAL_PARAMETERS_BYTE1       0x00
-#define IPOD_OPERATIONAL_PARAMETERS_BYTE2       0x00
+#define IPOD_OPERATIONAL_PARAMETERS_BYTE2       0x08
 #define IPOD_CP_INTERFACE                       0x20
 #define IPOD_CP_FREQUENCY                       (400000ul)
 #define IPOD_COMMAND_DELAY_IDL                  0
@@ -62,9 +62,11 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 #define IPOD_ACCESSORY_HARDWARE_VERSION_MAJOR   1
 #define IPOD_ACCESSORY_HARDWARE_VERSION_MINOR   0
 #define IPOD_ACCESSORY_HARDWARE_VERSION_REV     0
-#define IPOD_ACCESSORY_SOFTWARE_VERSION_MAJOR   0
+#define IPOD_ACCESSORY_SOFTWARE_VERSION_MAJOR   1
 #define IPOD_ACCESSORY_SOFTWARE_VERSION_MINOR   0
-#define IPOD_ACCESSORY_SOFTWARE_VERSION_REV     2
+#define IPOD_ACCESSORY_SOFTWARE_VERSION_REV     0
+
+
 
 //------------------------------------------------------------------------------
 // Lingoes, Capabilities, and Preferences
@@ -75,7 +77,7 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 #define IPOD_ACCESSORY_PREFERENCES_BYTE1        0x00
 
 #define IPOD_ACCESSORY_CAPABILITIES_BYTE0       0x00
-#define IPOD_ACCESSORY_CAPABILITIES_BYTE1       0x02
+#define IPOD_ACCESSORY_CAPABILITIES_BYTE1       0x00
 #define IPOD_ACCESSORY_CAPABILITIES_BYTE2       0x00
 #define IPOD_ACCESSORY_CAPABILITIES_BYTE3       0x00
 #define IPOD_ACCESSORY_CAPABILITIES_BYTE4       0x00
@@ -87,7 +89,7 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 //------------------------------------------------------------------------------
 // Accessory RF Certifications
 
-#define IPOD_ACCESSORY_RF_CERTIFICATIONS_BYTE0  0x10
+#define IPOD_ACCESSORY_RF_CERTIFICATIONS_BYTE0  0x00
 #define IPOD_ACCESSORY_RF_CERTIFICATIONS_BYTE1  0x00
 #define IPOD_ACCESSORY_RF_CERTIFICATIONS_BYTE2  0x00
 #define IPOD_ACCESSORY_RF_CERTIFICATIONS_BYTE3  0x00
@@ -102,13 +104,15 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 
 
 //------------------------------------------------------------------------------
-// OS Application Information
+// iOS Application Information
 
 #define IPOD_ACCESSORY_BUNDLE_SEED_ID           "ZH2665EYXS"
 #define IPOD_ACCESSORY_BUNDLE_ID                "com.microchip.mfiDemo"
+//#define IPOD_ACCESSORY_BUNDLE_ID                "CloudStream-Gaming.iGCS"
 #define IPOD_ACCESSORY_EA_STRING_COUNT          1
-#define IPOD_ACCESSORY_EA_STRINGS              "\x01" "com.fightingwalrus.prototype"
-//#define IPOD_ACCESSORY_EA_STRINGS              "\x01" "com.microchip.ipodaccessory.demo1"
+#define IPOD_ACCESSORY_EA_STRINGS              "\x02" "com.microchip.ipodaccessory.demo1"
+//#define IPOD_ACCESSORY_EA_STRINGS              "\x02" "com.fightingwalrus.prototype"
+
 
 
 //------------------------------------------------------------------------------
@@ -116,6 +120,10 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 
 #define IPOD_USB_EXTRA_CURRENT_IN_SUSPEND       0
 #define IPOD_USB_EXTRA_CURRENT_NOT_IN_SUSPEND   500
+
+
+
+
 
 
 #endif

@@ -27,40 +27,104 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 ********************************************************************************
 */
 
-// Created by the Microchip MFi Library SW320411 Configuration Utility, Version 3.05.00.00, 4/7/2013, 1:56:09
+// Created by the Microchip MFi Library SW320411 Configuration Utility, Version 3.05.00.00, 3/29/2013, 15:20:28
 
-#ifndef _MFI_HANDLERS_H
-#define _MFI_HANDLERS_H
+#define _MFI_HANDLERS_C
 
-#include "GenericTypeDefs.h"
-#include "Compiler.h"
+#include "mfi_handlers.h"
 
-#include "mfi_config.h"
+void MFICB_CommandReceive ( void )
+{
+    MFIIF_UART_CommandReceive ();
+}
 
-#include "MFI/MFI_iPod.h"
+void MFICB_CommandTransmit ( void )
+{
+    MFIIF_UART_CommandTransmit ();
+}
 
-#ifdef  _MFI_HANDLERS_C
+IPOD_COMMUNICATION_STATUS MFICB_GetStatus ( void )
+{
+    IPOD_COMMUNICATION_STATUS status;
 
-    #include "MFI/MFI_Interface.h"
-    #include "MFI/MFI_Identification.h"
-    #include "MFI/MFI_Authentication.h"
+    status = MFIIF_UART_GetStatus ();
+    if ( MFIID_IsIdentifying() )
+    {
+        status.identifying = 1;
+    }
+    if ( MFIAU_IsAuthenticating() )
+    {
+        status.authenticating = 1;
+    }
+    return status;
+}
 
-#endif
+UINT8 MFICB_Initialize ( void )
+{
+    MFIIF_UART_Initialize ();
+    MFIID_Initialize ();
+    if ( ! MFIAU_Initialize () )
+    {
+        return IPOD_CP_ERROR;
+    }
+    return IPOD_SUCCESS;
+}
 
-void MFICB_CommandReceive( void );
-void MFICB_CommandTransmit( void );
-IPOD_COMMUNICATION_STATUS MFICB_GetStatus ( void );
-UINT8 MFICB_Initialize ( void );
-BOOL MFICB_IsiPodAttached( void );
-BOOL MFICB_IsReadyForiAP( void );
-BOOL MFICB_ProcessCompletion ( void );
-void MFICB_ProcessiPodAttach( void );
-void MFICB_ProcessiPodDetach ( void );
-BOOL MFICB_ProcessPacket ( void );
-void MFICB_ResetInputCommandBuffer( void );
-void MFICB_Shutdown( void );
-void MFICB_Tasks ( void );
-void MFICB_TerminateReceive( void );
+BOOL MFICB_IsiPodAttached ( void )
+{
+    return MFIIF_UART_IsiPodAttached ();
+}
 
-#endif
+BOOL MFICB_IsReadyForiAP ( void )
+{
+    return MFIIF_UART_IsReadyForiAP ();
+}
+
+BOOL MFICB_ProcessCompletion ( void )
+{
+    if ( MFIID_ProcessCompletion() ) return TRUE;
+    if ( MFIAU_ProcessCompletion() ) return TRUE;
+    return FALSE;
+}
+
+void MFICB_ProcessiPodAttach ( void )
+{
+    MFIIF_UART_ProcessiPodAttach ();
+}
+
+void MFICB_ProcessiPodDetach ( void )
+{
+    MFIID_ProcessiPodDetach ();
+    MFIAU_ProcessiPodDetach ();
+    MFIIF_UART_ProcessiPodDetach ();
+}
+
+BOOL MFICB_ProcessPacket ( void )
+{
+    if ( MFIID_ProcessPacket() ) return TRUE;
+    if ( MFIAU_ProcessPacket() ) return TRUE;
+    return FALSE;
+}
+
+void MFICB_ResetInputCommandBuffer ( void )
+{
+    MFIIF_UART_ResetInputCommandBuffer ();
+}
+
+void MFICB_Shutdown ( void )
+{
+    MFIIF_UART_Shutdown ();
+}
+
+void MFICB_Tasks ( void )
+{
+    MFIIF_UART_Tasks ();
+    MFIID_Tasks ();
+    MFIAU_Tasks ();
+}
+
+void MFICB_TerminateReceive ( void )
+{
+    MFIIF_UART_TerminateReceive ();
+}
 

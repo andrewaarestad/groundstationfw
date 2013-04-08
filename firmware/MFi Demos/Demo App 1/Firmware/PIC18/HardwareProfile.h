@@ -43,12 +43,14 @@ Author          Date    Comments
 
 //Turn on PLL and increase the baudrate
 //#define GetSystemClock()                    8000000UL
-#define GetSystemClock()                    12000000UL
+//#define GetSystemClock()                    12000000UL  // microchip mfi eval board
+#define GetSystemClock()                    14745400UL  // andrew's board rev1
 
 #define GetPeripheralClock()                (GetSystemClock() / 4)
 #define GetInstructionClock()               (GetSystemClock() / 4)
 
 #define I2C_Clock()                         GetInstructionClock()
+//#define I2C_Clock()                         (3000000ul)
 
 
 //******************************************************************************
@@ -261,10 +263,10 @@ Author          Date    Comments
 //------------------------------------------------------------------------------
 // Special Board Capabilities
 
-#define VIDEO_OUTPUT_AVAILABLE
-#define AUDIO_OUTPUT_AVAILABLE
-#define HEADPHONE_AMPLIFIER_AVAILABLE
-#define TEMPERATURE_SENSOR_AVAILABLE
+//#define VIDEO_OUTPUT_AVAILABLE
+//#define AUDIO_OUTPUT_AVAILABLE
+//#define HEADPHONE_AMPLIFIER_AVAILABLE
+//#define TEMPERATURE_SENSOR_AVAILABLE
 
 #endif
 
